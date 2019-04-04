@@ -19,9 +19,9 @@
 
 <script>
 import { getToken } from '@/libs/util'
-import svg403 from './403.svg'
-import svg404 from './404.svg'
-import svg500 from './500.svg'
+import svg403 from '@/assets/svg/403.svg'
+import svg404 from '@/assets/svg/404.svg'
+import svg500 from '@/assets/svg/500.svg'
 
 export default {
   name: 'error',
