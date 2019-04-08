@@ -54,24 +54,35 @@ export const staticRoutes = [
     }
   },
   {
-    path: '/login',
-    name: 'login',
+    path: '/login-layout',
+    name: 'login-layout',
     component: () =>
-      import(/* webpackChunkName: "login" */ '@/views/user/login'),
+      import(/* webpackChunkName: "login-base" */ '@/components/layout/login-layout'),
     meta: {
-      title: '登录',
       hideInMenu: true
-    }
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () =>
-      import(/* webpackChunkName: "register" */ '@/views/user/register'),
-    meta: {
-      title: '注册',
-      hideInMenu: true
-    }
+    },
+    children: [
+      {
+        path: '/login',
+        name: 'login',
+        component: () =>
+          import(/* webpackChunkName: "login" */ '@/views/user/login'),
+        meta: {
+          title: '登录',
+          hideInMenu: true
+        }
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: () =>
+          import(/* webpackChunkName: "register" */ '@/views/user/register'),
+        meta: {
+          title: '注册',
+          hideInMenu: true
+        }
+      }
+    ]
   },
   {
     path: '/error/:code',
@@ -86,6 +97,7 @@ export const staticRoutes = [
   {
     path: '*',
     redirect: '/error/404',
+    name: 'any',
     meta: {
       hideInMenu: true
     }

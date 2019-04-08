@@ -4,10 +4,10 @@ import { stringify } from 'qs'
 import { Message } from 'element-ui'
 
 const request = axios.create({
-  baseURL: process.env.VUE_APP_REQUEST_BASE_URL,
+  baseURL: process.env.VUE_APP_SERVER_BASE_URL,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    token: getToken()
+    'token': `${getToken()}`
   },
   transformRequest: [
     data => (data ? stringify(data, { arrayFormat: 'brackets' }) : data)

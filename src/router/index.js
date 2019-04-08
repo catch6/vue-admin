@@ -52,8 +52,9 @@ router.beforeEach((to, from, next) => {
           // 设置 replace: true 可以避免用户在返回的时候回退到登录页
           next({ ...to, replace: true })
         })
-        .catch(() => {
-          clearLogin()
+        .catch(error => {
+          window.console.error(error)
+          // clearLogin()
           next({ name: 'login' })
         })
     }

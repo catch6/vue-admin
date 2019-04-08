@@ -1,7 +1,5 @@
 <template>
-  <div class="register">
-
-  </div>
+  <div class="register"></div>
 </template>
 
 <script>
@@ -13,6 +11,4 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>

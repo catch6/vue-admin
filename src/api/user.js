@@ -1,19 +1,16 @@
 import request from '@/libs/request'
 
-export const login = (username, password) => {
+export const login = form => {
   return request({
     url: '/user/login',
     method: 'post',
-    data: {
-      username,
-      password
-    }
+    data: form
   })
 }
 
 export const getUserInfo = () => {
   return request({
-    url: '/user/getUserInfo',
+    url: '/user/info',
     method: 'get'
   })
 }

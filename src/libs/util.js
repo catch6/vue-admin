@@ -3,14 +3,13 @@ import store from '@/store'
 import { resetRouter } from '@/router'
 
 const TOKEN_KEY = 'token'
-const cookieExpires = 7 // token保存天数
 
 export const getToken = () => {
   return Cookies.get(TOKEN_KEY)
 }
 
-export const setToken = token => {
-  return Cookies.set(TOKEN_KEY, token, { expires: cookieExpires || 1 })
+export const setToken = (token, expires) => {
+  return Cookies.set(TOKEN_KEY, token, { expires: expires || 1 })
 }
 
 export const removeToken = () => {
@@ -65,7 +64,9 @@ export const routeInRoutes = (route, routes) => {
       return true
     } else {
       if (item.children) {
-        return routeInRoutes(route, item.children)
+        if (routeInRoutes(route, item.children)) {
+          return true
+        }
       }
     }
   }

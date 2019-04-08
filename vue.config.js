@@ -62,7 +62,7 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    config.resolve.extensions = ['.js', 'vue', '.json', '.styl', '.css']
+    // config.resolve.extensions = ['.js', 'vue', '.json', '.styl', '.css']
     config.resolve.alias
       .set('@', resolve('src'))
   }

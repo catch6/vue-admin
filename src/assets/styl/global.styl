@@ -2,10 +2,20 @@ full-size()
   width 100%
   height 100%
 
+html, body, #app
+  full-size()
+
 *
   margin 0
   padding 0
+
+*, :after, :before
   box-sizing border-box
 
-html, body, #app
-  full-size()
+body
+  font-family -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol
+  a
+    color #1890ff
+    text-decoration none
+    outline 0
+    transition color .3s

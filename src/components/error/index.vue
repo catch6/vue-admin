@@ -64,9 +64,11 @@ export default {
 
 <style lang="stylus" scoped>
 .error
-  height 100%
+  height 100vh
   display flex
   .wrapper
+    position relative
+    bottom 50px
     margin auto
     .img
       display inline-block
