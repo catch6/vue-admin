@@ -1,4 +1,4 @@
-# vue-admin
+<h1 align="center">vue-admin</h1>
 <p align="center">
 <br>
 一个简单易于食用的后端管理框架
