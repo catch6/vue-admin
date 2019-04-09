@@ -1,12 +1,15 @@
 import axios from 'axios'
-import { getToken, removeToken } from './util'
+import { getToken, clearLogin } from './util'
 import { stringify } from 'qs'
-import { Message } from 'element-ui'
+import { MessageBox } from 'element-ui'
+import router from '@/router'
 
 const request = axios.create({
   baseURL: process.env.VUE_APP_SERVER_BASE_URL,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    post: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
   }
 })
 
@@ -35,12 +38,15 @@ request.interceptors.response.use(
         case 200:
           return ret
         case 401:
-          Message.error('您的登录已过期，即将前往登录页...')
-          removeToken()
-          setTimeout(() => {
-            location.reload()
-          }, 1500)
-          break
+          MessageBox.confirm('您的登录已过期，请重新登录', '提示', {
+            confirmButtonText: '去登录',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            clearLogin()
+            router.push({ name: 'login' })
+          })
+          return Promise.reject(`${ret.code}:${ret.msg}`)
         default:
           return Promise.reject(`${ret.code}:${ret.msg}`)
       }

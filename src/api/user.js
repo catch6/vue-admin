@@ -14,3 +14,11 @@ export const getUserInfo = () => {
     method: 'get'
   })
 }
+
+export const register = form => {
+  return request({
+    url: '/user/register',
+    method: 'post',
+    data: form
+  })
+}

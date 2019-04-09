@@ -16,6 +16,7 @@ export default {
   methods: {
     logout() {
       clearLogin()
+      this.$router.push({ name: 'login' })
     }
   }
 }

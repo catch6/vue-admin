@@ -55,10 +55,10 @@ export const staticRoutes = [
     }
   },
   {
-    path: '/login-layout',
-    name: 'login-layout',
+    path: '/base-layout',
+    name: 'base-layout',
     component: () =>
-      import(/* webpackChunkName: "login-base" */ '@/components/layout/login-layout'),
+      import(/* webpackChunkName: "base-layout" */ '@/views/user/base-layout'),
     meta: {
       hideInMenu: true
     },
@@ -89,7 +89,7 @@ export const staticRoutes = [
     path: '/error/:code',
     name: 'error',
     component: () =>
-      import(/* webpackChunkName: "404" */ '../components/error'),
+      import(/* webpackChunkName: "error" */ '../components/error'),
     meta: {
       title: '错误',
       hideInMenu: true

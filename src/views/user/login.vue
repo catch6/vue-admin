@@ -16,17 +16,26 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox v-model="form.remember">自动登录</el-checkbox>
+        <el-checkbox v-model="form.remember">在本设备保存登录状态</el-checkbox>
         <a class="fr" href="/">忘记密码</a>
       </el-form-item>
       <el-form-item class="login-button-wrapper mb0">
-        <el-button class="login-button" type="primary" @click="handleLogin" :loading="loading">
+        <el-button
+          class="login-button"
+          type="primary"
+          @click="handleLogin"
+          :loading="loading"
+        >
           登录
         </el-button>
       </el-form-item>
       <el-form-item>
         <span class="fr">
-          还没账号？去<router-link to="/register">注册</router-link></span>
+          还没账号？去
+          <router-link :to="{ name: 'register', query: $route.query }">
+            注册
+          </router-link>
+        </span>
       </el-form-item>
     </el-form>
   </div>
@@ -92,10 +101,11 @@ export default {
             .then(data => {
               setToken(data.token, this.form.remember ? 30 : 1)
               this.loading = false
-              this.$router.push({ path: this.redirect || '/' })
+              this.$router.replace(this.redirect || { name: 'home' })
             })
-            .catch(() => {
+            .catch(error => {
               this.loading = false
+              console.error(error)
             })
         } else {
           return false
