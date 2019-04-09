@@ -3,14 +3,19 @@ import { getUserInfo } from '@/api/user'
 export default {
   namespaced: true,
   state: {
-    roles: []
+    roles: [],
+    routes: []
   },
   getters: {
-    roles: state => state.roles
+    roles: state => state.roles,
+    routes: state => state.routes
   },
   mutations: {
     setRoles(state, roles) {
       state.roles = roles
+    },
+    setRoutes(state, routes) {
+      state.routes = routes
     }
   },
   actions: {

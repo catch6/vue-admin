@@ -48,6 +48,7 @@ router.beforeEach((to, from, next) => {
         .then(user => {
           // 拉取用户信息，通过用户角色列表来加载具有权限的路由;
           const accessRoutes = filterDynamicRoutes(dynamicRoutes, user.roles)
+          store.commit('user/setRoutes', [...staticRoutes, ...accessRoutes])
           router.addRoutes(accessRoutes)
           // 设置 replace: true 可以避免用户在返回的时候回退到登录页
           next({ ...to, replace: true })

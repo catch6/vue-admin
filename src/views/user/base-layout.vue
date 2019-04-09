@@ -28,10 +28,7 @@
 
 <script>
 export default {
-  name: 'base-layout',
-  data() {
-    return {}
-  }
+  name: 'base-layout'
 }
 </script>
 

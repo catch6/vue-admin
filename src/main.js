@@ -4,8 +4,7 @@ import router from './router'
 import store from './store'
 import 'normalize.css'
 import './plugins/element.js'
-import './assets/styl/global.styl'
-import './assets/styl/util.styl'
+import '@/assets/styl/global.styl'
 import Cookies from 'js-cookie'
 
 Cookies.set('ss', 'ssss', { expires: 7 })

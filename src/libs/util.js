@@ -58,6 +58,12 @@ export const filterDynamicRoutes = (routes, roles) => {
   return accessRoutes
 }
 
+/**
+ * 判断一个路由是否在路由列表（包含子路由）中
+ * @param route
+ * @param routes
+ * @returns {boolean}
+ */
 export const routeInRoutes = (route, routes) => {
   for (const item of routes) {
     if (item.name === route.name) {
