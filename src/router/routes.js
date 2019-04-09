@@ -25,12 +25,12 @@ export const dynamicRoutes = [
     children: [
       {
         path: '/home',
+        name: 'home',
         component: () => import(/* webpackChunkName: "home" */ '../views/home'),
         meta: {
           title: '主页',
           icon: 'home',
-          hideInBread: true,
-          roles: ['user', 'admin']
+          hideInBread: true
         }
       }
     ]
@@ -38,6 +38,7 @@ export const dynamicRoutes = [
   {
     path: '*',
     redirect: '/error/404',
+    name: 'any',
     meta: {
       hideInMenu: true
     }
@@ -91,14 +92,6 @@ export const staticRoutes = [
       import(/* webpackChunkName: "404" */ '../components/error'),
     meta: {
       title: '错误',
-      hideInMenu: true
-    }
-  },
-  {
-    path: '*',
-    redirect: '/error/404',
-    name: 'any',
-    meta: {
       hideInMenu: true
     }
   }

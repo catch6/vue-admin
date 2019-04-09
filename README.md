@@ -1,4 +1,10 @@
 # vue-admin
+<p align="center">
+<br>
+一个简单易于食用的后端管理框架
+<br><br>
+<a title="Hits" target="_blank" href="http://hits.dwyl.io/CatchLife/vue-admin"><img src="http://hits.dwyl.io/CatchLife/vue-admin.svg"></a>
+</p>
 
 ## Project setup
 ```

@@ -54,7 +54,9 @@
         "error",
         "never"
       ],
-      "no-unused-vars": "warn"
+      "no-unused-vars": "warn",
+      "no-debugger": "off",
+      "no-console": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

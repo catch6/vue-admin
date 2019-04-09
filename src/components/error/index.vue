@@ -2,7 +2,7 @@
   <div class="error">
     <div class="wrapper">
       <div class="img">
-        <img :src="config[code].img" alt="" />
+        <img :src="config[code].img" alt=""/>
       </div>
       <div class="content">
         <h1>{{ config[code].title }}</h1>
@@ -49,7 +49,8 @@ export default {
   },
   methods: {
     handleToHome() {
-      if (getToken()) {
+      const token = getToken()
+      if (token) {
         this.$router.push({ name: 'home' })
       } else {
         this.$router.push({ name: 'login' })

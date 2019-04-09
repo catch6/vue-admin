@@ -6,21 +6,19 @@ import { Message } from 'element-ui'
 const request = axios.create({
   baseURL: process.env.VUE_APP_SERVER_BASE_URL,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    'token': `${getToken()}`
-  },
-  transformRequest: [
-    data => (data ? stringify(data, { arrayFormat: 'brackets' }) : data)
-  ]
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  }
 })
 
 // 请求拦截器
 request.interceptors.request.use(
   config => {
-    if (getToken()) {
+    const token = getToken()
+    if (token) {
       // 让每个请求携带token
-      config.headers['X-Token'] = getToken
+      config.data = { ...config.data, token }
     }
+    config.data = stringify(config.data, { arrayFormat: 'brackets' })
     return config
   },
   error => {

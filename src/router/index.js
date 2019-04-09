@@ -27,7 +27,7 @@ export const resetRouter = () => {
 }
 
 // 登录后需要重定向到首页的路由name列表
-const redirectRoutes = ['login', 'register', 'error']
+const redirectRoutes = ['login', 'register']
 
 router.beforeEach((to, from, next) => {
   const token = getToken()
@@ -53,8 +53,8 @@ router.beforeEach((to, from, next) => {
           next({ ...to, replace: true })
         })
         .catch(error => {
-          window.console.error(error)
-          // clearLogin()
+          console.error(error)
+          clearLogin()
           next({ name: 'login' })
         })
     }
