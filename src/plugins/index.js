@@ -1,0 +1,5 @@
+import 'normalize.css'
+import './element'
+import '@/assets/css/vue-svgicon.css'
+import './vue-svgicon'
+import '@/assets/styl/global.styl'

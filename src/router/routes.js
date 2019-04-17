@@ -30,7 +30,8 @@ export const dynamicRoutes = [
         meta: {
           title: '主页',
           icon: 'home',
-          hideInBread: true
+          hideInBread: true,
+          roles: ['admin']
         }
       }
     ]

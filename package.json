@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve --mode dev",
     "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
-    "analyz": "npm_config_report=true vue-cli-service build"
+    "analyz": "npm_config_report=true vue-cli-service build",
+    "svg": "vsvg -s ./src/svg -t ./src/components/icons"
   },
   "dependencies": {
     "aliyunoss-webpack-plugin": "^0.2.1",
@@ -34,6 +35,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-element": "^1.0.1",
+    "vue-svgicon": "^3.2.6",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {

@@ -1,21 +1,22 @@
 import { getUserInfo } from '@/api/user'
+import { filterMenuRoutes } from '@/libs/util'
 
 export default {
   namespaced: true,
   state: {
     roles: [],
-    routes: []
+    menuRoutes: []
   },
   getters: {
     roles: state => state.roles,
-    routes: state => state.routes
+    menuRoutes: state => state.menuRoutes
   },
   mutations: {
     setRoles(state, roles) {
       state.roles = roles
     },
-    setRoutes(state, routes) {
-      state.routes = routes
+    setMenuRoutes(state, routes) {
+      state.menuRoutes = filterMenuRoutes(routes)
     }
   },
   actions: {

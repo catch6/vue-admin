@@ -1,12 +1,12 @@
 <template>
   <div class="layout-aside-item">
     <el-menu-item v-if="type === 1" :route="item" :index="item.path">
-      <icon :name="item.meta.icon" scale="2"></icon>
+      <icon :name="item.meta.icon"></icon>
       <span slot="title" v-text="item.meta.title"></span>
     </el-menu-item>
     <el-submenu v-if="type === 2" :index="navIndex">
       <template slot="title">
-        <icon :name="item.meta.icon" scale="2"></icon>
+        <icon :name="item.meta.icon" class="icon"></icon>
         <span slot="title" v-text="item.meta.title"> </span>
       </template>
       <layout-aside-item
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import '@/components/icons'
+import { hasChildren } from '@/libs/util'
+
 export default {
   name: 'layout-aside-item',
   props: ['item', 'navIndex'],
@@ -31,18 +34,24 @@ export default {
      */
     type() {
       const item = this.item
-      if (!item.meta.hideInMenu) {
-        if (item.children && this.item.children.length) {
-          if (item.children.some(child => !child.meta.hideInMenu)) {
+      if (item.meta.hideInMenu) {
+        return 0
+      } else {
+        if (hasChildren(item)) {
+          if (item.children.some(one => !one.meta.hideInMenu)) {
             return 2
           }
         }
         return 1
       }
-      return 0
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.layout-aside-item
+  .svg-icon
+    width 1.5em
+    margin-right 8px
+</style>

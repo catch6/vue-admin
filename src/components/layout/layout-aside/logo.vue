@@ -16,5 +16,10 @@ export default {
 <style lang="stylus" scoped>
 .layout-aside-logo
   height 60px
-  background-color cyan
+  line-height 60px
+  text-align center
+  color #fff
+  font-size 25px
+  font-weight 700
+  background-color #2c3e50
 </style>

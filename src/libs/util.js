@@ -39,6 +39,15 @@ function hasAccess(route, roles) {
 }
 
 /**
+ * 判断对象是否含有 children
+ * @param route 要判断的路由
+ * @returns {Boolean}
+ */
+export const hasChildren = route => {
+  return route.children && route.children.length
+}
+
+/**
  * 过滤动态路由
  * @param routes {Array} 动态路由列表
  * @param roles {Array} 用户角色列表
@@ -49,7 +58,7 @@ export const filterDynamicRoutes = (routes, roles) => {
   routes.forEach(route => {
     const tmpRoute = { ...route } // 设置临时变量来存储当前路由，不在原路由上做修改，注意！不要修改dynamicRoutes！！！
     if (hasAccess(tmpRoute, roles)) {
-      if (tmpRoute.children) {
+      if (hasChildren(tmpRoute)) {
         tmpRoute.children = filterDynamicRoutes(tmpRoute.children, roles)
       }
       accessRoutes.push(route)
@@ -60,8 +69,8 @@ export const filterDynamicRoutes = (routes, roles) => {
 
 /**
  * 判断一个路由是否在路由列表（包含子路由）中
- * @param route
- * @param routes
+ * @param route 要判断的路由
+ * @param routes 路由列表
  * @returns {boolean}
  */
 export const routeInRoutes = (route, routes) => {
@@ -69,7 +78,7 @@ export const routeInRoutes = (route, routes) => {
     if (item.name === route.name) {
       return true
     } else {
-      if (item.children) {
+      if (hasChildren(item)) {
         if (routeInRoutes(route, item.children)) {
           return true
         }
@@ -77,4 +86,24 @@ export const routeInRoutes = (route, routes) => {
     }
   }
   return false
+}
+
+/**
+ * 过滤菜单路由
+ * @param routes 全部可访问路由列表
+ */
+export const filterMenuRoutes = routes => {
+  let menuRoutes = []
+  routes.forEach(route => {
+    if (route.name === 'layout') {
+      if (hasChildren(route)) {
+        menuRoutes.push(...route.children)
+      }
+    } else {
+      if (!route.meta.hideInMenu) {
+        menuRoutes.push(route)
+      }
+    }
+  })
+  return menuRoutes
 }

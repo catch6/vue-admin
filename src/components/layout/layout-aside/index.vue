@@ -1,6 +1,6 @@
 <template>
-  <el-aside width="200px">
-    <layout-aside-logo></layout-aside-logo>
+  <el-aside width="260px" class="layout-aside">
+    <logo></logo>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="defaultActive"
@@ -10,9 +10,10 @@
         background-color="#2c3e50"
         text-color="#ecf0f1"
         active-text-color="#ffd04b"
+        class="menu"
       >
-        <layout-aside-item
-          v-for="(item, index) in routes"
+        <item
+          v-for="(item, index) in menuRoutes"
           :item="item"
           :navIndex="`${item.name}`"
           :key="index"
@@ -23,13 +24,13 @@
 </template>
 
 <script>
-import LayoutAsideLogo from './layout-aside-logo'
-import LayoutAsideItem from './layout-aside-item'
+import logo from './logo'
+import item from './item'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'layout-aside',
-  components: { LayoutAsideLogo, LayoutAsideItem },
+  components: { logo, item },
   data() {
     return {
       defaultActive: this.$route.name,
@@ -37,9 +38,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['routes'])
+    ...mapGetters('user', ['menuRoutes'])
   }
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.layout-aside
+  height 100vh
+  .menu
+    height calc(100vh - 60px)
+    border-right none
+</style>

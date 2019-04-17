@@ -2,7 +2,7 @@
   <div class="error">
     <div class="wrapper">
       <div class="img">
-        <img :src="config[code].img" alt=""/>
+        <img :src="config[code].img" alt="" />
       </div>
       <div class="content">
         <h1>{{ config[code].title }}</h1>
