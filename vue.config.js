@@ -41,10 +41,5 @@ module.exports = {
     } else {
       // 为开发环境修改配置...
     }
-  },
-  chainWebpack: config => {
-    // config.resolve.extensions = ['.js', 'vue', '.json', '.styl', '.css']
-    config.resolve.alias
-      .set('@', resolve('src'))
   }
 }
