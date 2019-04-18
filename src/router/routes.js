@@ -1,4 +1,4 @@
-import Layout from '../components/layout'
+import Layout from '../components/Layout'
 
 /**
  * 路由可配置参数
@@ -12,6 +12,8 @@ import Layout from '../components/layout'
     roles: (default: null) 可访问该页面的权限数组，当前路由设置的权限会影响子路由
     href: 'https://xxx' (default: null) 用于跳转到外部连接
   }
+
+ 注意！所有组件（除了 layout ），必须父组件显示子组件才能显示
  */
 
 export const dynamicRoutes = [
@@ -32,6 +34,17 @@ export const dynamicRoutes = [
           icon: 'home',
           hideInBread: true,
           roles: ['admin']
+        }
+      },
+      {
+        path: '/a',
+        name: 'A',
+        component: () => import(/* webpackChunkName: "a" */ '../views/A'),
+        meta: {
+          title: 'A',
+          icon: 'menu',
+          hideInBread: true,
+          roles: ['super']
         }
       }
     ]

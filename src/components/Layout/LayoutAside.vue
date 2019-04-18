@@ -1,10 +1,16 @@
 <template>
-  <el-aside class="layout-aside" :style="{width:isCollapse?'auto':'220px'}">
+  <div class="layout-aside">
     <div class="layout-aside-logo">
-      logo
+      <router-link to="/home">
+        LOGO
+      </router-link>
     </div>
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <el-scrollbar
+      class="layout-aside-scrollbar"
+      wrap-class="layout-aside-scrollbar-wrap"
+    >
       <el-menu
+        class="layout-aside-menu"
         :default-active="defaultActive"
         router
         unique-opened
@@ -12,9 +18,8 @@
         background-color="#2c3e50"
         text-color="#ecf0f1"
         active-text-color="#ffd04b"
-        class="menu"
       >
-        <item
+        <layout-aside-menu-item
           v-for="(item, index) in menuRoutes"
           :item="item"
           :navIndex="`${item.name}`"
@@ -22,16 +27,16 @@
         />
       </el-menu>
     </el-scrollbar>
-  </el-aside>
+  </div>
 </template>
 
 <script>
-import item from './item'
+import LayoutAsideMenuItem from './LayoutAsideMenuItem'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'layout-aside',
-  components: { item },
+  name: 'LayoutAside',
+  components: { LayoutAsideMenuItem },
   data() {
     return {
       defaultActive: this.$route.name
@@ -47,6 +52,8 @@ export default {
 <style lang="stylus" scoped>
 .layout-aside
   height 100vh
+  user-select none
+  background-color #2c3e50
   .layout-aside-logo
     height 60px
     line-height 60px
@@ -54,8 +61,17 @@ export default {
     color #fff
     font-size 25px
     font-weight 700
-    background-color #2c3e50
-  .menu
+  .layout-aside-scrollbar
     height calc(100vh - 60px)
-    border-right none
+    overflow-x hidden
+    .layout-aside-menu
+      border-right none
+      &:not(.el-menu--collapse)
+        width 220px
+        overflow-y auto
+</style>
+
+<style lang="stylus">
+.el-scrollbar__wrap
+  overflow-x hidden !important
 </style>

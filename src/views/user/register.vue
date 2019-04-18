@@ -35,7 +35,7 @@
       <el-form-item>
         <el-checkbox v-model="form.remember">在本设备保存登录状态</el-checkbox>
       </el-form-item>
-      <el-form-item class="register-button-wrapper mb0">
+      <el-form-item class="register-button-wrapper">
         <el-button
           class="register-button"
           type="primary"
@@ -183,6 +183,8 @@ export default {
   .sms-code-btn
     float right
     width 33%
-  .register-button
-    width 100%
+  .register-button-wrapper
+    margin-bottom 0
+    .register-button
+      width 100%
 </style>

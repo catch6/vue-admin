@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import store from '@/store'
 import { resetRouter } from '@/router'
+import menu from '@/router/menu'
 
 const TOKEN_KEY = 'token'
 
@@ -56,10 +57,9 @@ export const hasChildren = route => {
 export const filterDynamicRoutes = (routes, roles) => {
   const accessRoutes = []
   routes.forEach(route => {
-    const tmpRoute = { ...route } // 设置临时变量来存储当前路由，不在原路由上做修改，注意！不要修改dynamicRoutes！！！
-    if (hasAccess(tmpRoute, roles)) {
-      if (hasChildren(tmpRoute)) {
-        tmpRoute.children = filterDynamicRoutes(tmpRoute.children, roles)
+    if (hasAccess(route, roles)) {
+      if (hasChildren(route)) {
+        route.children = filterDynamicRoutes(route.children, roles)
       }
       accessRoutes.push(route)
     }
@@ -68,18 +68,18 @@ export const filterDynamicRoutes = (routes, roles) => {
 }
 
 /**
- * 判断一个路由是否在路由列表（包含子路由）中
- * @param route 要判断的路由
+ * 判断一个路由的 name 是否在路由列表（包含子路由）中
+ * @param name 要判断的路由的 name
  * @param routes 路由列表
  * @returns {boolean}
  */
-export const routeInRoutes = (route, routes) => {
+export const nameInRoutes = (name, routes) => {
   for (const item of routes) {
-    if (item.name === route.name) {
+    if (item.name === name) {
       return true
     } else {
       if (hasChildren(item)) {
-        if (routeInRoutes(route, item.children)) {
+        if (nameInRoutes(name, item.children)) {
           return true
         }
       }
@@ -106,4 +106,30 @@ export const filterMenuRoutes = routes => {
     }
   })
   return menuRoutes
+}
+
+/**
+ * 过滤菜单数组
+ * @param menu 菜单列表
+ * @param routes 全部可访问路由列表
+ */
+export const filterMenu = (menu, routes) => {
+  let accessMenu = []
+  menu.forEach(item => {
+    if (nameInRoutes(item.name, routes)) {
+      if (hasChildren(item)) {
+        let accessChildrenMenu = filterMenu(item.children, routes)
+        if (accessChildrenMenu.length) {
+          item.children = accessChildrenMenu
+          accessMenu.push(item)
+        } else {
+          delete item.children
+          accessMenu.push(item)
+        }
+      } else {
+        accessMenu.push(item)
+      }
+    }
+  })
+  return accessMenu
 }

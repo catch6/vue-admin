@@ -19,7 +19,7 @@
         <el-checkbox v-model="form.remember">在本设备保存登录状态</el-checkbox>
         <a class="fr" href="/">忘记密码</a>
       </el-form-item>
-      <el-form-item class="login-button-wrapper mb0">
+      <el-form-item class="login-button-wrapper">
         <el-button
           class="login-button"
           type="primary"
@@ -124,6 +124,8 @@ export default {
     margin-bottom 20px
     font-size 16px
     font-weight 600
-  .login-button
-    width 100%
+  .login-button-wrapper
+    margin-bottom 0
+    .login-button
+      width 100%
 </style>
