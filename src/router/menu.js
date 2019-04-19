@@ -6,17 +6,144 @@ const menu = [
   },
   {
     title: '1',
-    icon: '1',
-    name: 'home'
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '5',
+        icon: 'home',
+        name: 'home',
+        children: [
+          {
+            title: '6',
+            icon: 'home',
+            name: 'home'
+          }
+        ]
+      }
+    ]
   },
   {
     title: '2',
-    icon: '2',
+    icon: 'home',
     name: 'home',
     children: [
       {
         title: '3',
-        icon: '3',
+        icon: 'home',
+        name: 'A'
+      },
+      {
+        title: '4',
+        icon: 'home',
+        name: 'home'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
+        name: 'A'
+      }
+    ]
+  },
+  {
+    title: '7',
+    icon: 'home',
+    name: 'home',
+    children: [
+      {
+        title: '8',
+        icon: 'home',
         name: 'A'
       }
     ]

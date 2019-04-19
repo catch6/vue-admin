@@ -1,16 +1,13 @@
 <template>
   <div class="layout-aside">
     <div class="layout-aside-logo">
-      <router-link to="/home">
+      <router-link :to="{ name: 'home' }">
         LOGO
       </router-link>
     </div>
-    <el-scrollbar
-      class="layout-aside-scrollbar"
-      wrap-class="layout-aside-scrollbar-wrap"
-    >
+    <el-scrollbar class="layout-aside-scrollbar">
       <el-menu
-        class="layout-aside-menu"
+        :class="['layout-aside-menu', isCollapse ? 'collapse' : '']"
         :default-active="defaultActive"
         router
         unique-opened
@@ -20,10 +17,9 @@
         active-text-color="#ffd04b"
       >
         <layout-aside-menu-item
-          v-for="(item, index) in menuRoutes"
+          v-for="item in menu"
           :item="item"
-          :navIndex="`${item.name}`"
-          :key="index"
+          :key="item.id"
         />
       </el-menu>
     </el-scrollbar>
@@ -43,7 +39,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', ['menuRoutes']),
+    ...mapGetters('user', ['menu']),
     ...mapGetters('layout', ['isCollapse'])
   }
 }
@@ -64,11 +60,11 @@ export default {
   .layout-aside-scrollbar
     height calc(100vh - 60px)
     overflow-x hidden
+    padding-left 5px
     .layout-aside-menu
       border-right none
       &:not(.el-menu--collapse)
         width 220px
-        overflow-y auto
 </style>
 
 <style lang="stylus">

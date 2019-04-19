@@ -8,6 +8,7 @@ import {
   clearLogin,
   nameInRoutes
 } from '../libs/util'
+import allMenu from '@/router/menu'
 
 Vue.use(Router)
 
@@ -33,7 +34,7 @@ router.beforeEach((to, from, next) => {
   const token = getToken()
   if (token) {
     // 已登录
-    if (store.getters['user/roles'].length) {
+    if (store.getters['user/menu']) {
       // 拥有角色列表说明已加载动态路由列表
       if (redirectRoutes.includes(to.name)) {
         // 当要请求的页面在 redirectHomePages 中时，直接重定向到主页
@@ -49,7 +50,10 @@ router.beforeEach((to, from, next) => {
           // 拉取用户信息，通过用户角色列表来加载具有权限的路由;
           const accessRoutes = filterDynamicRoutes(dynamicRoutes, user.roles)
           router.addRoutes(accessRoutes)
-          store.commit('user/generateMenu', [...staticRoutes, ...accessRoutes])
+          store.commit('user/generateMenu', {
+            allMenu,
+            routes: [...staticRoutes, ...accessRoutes]
+          })
           // 设置 replace: true 可以避免用户在返回的时候回退到登录页
           next({ ...to, replace: true })
         })

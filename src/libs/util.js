@@ -1,7 +1,6 @@
 import Cookies from 'js-cookie'
 import store from '@/store'
 import { resetRouter } from '@/router'
-import menu from '@/router/menu'
 
 const TOKEN_KEY = 'token'
 
@@ -40,12 +39,12 @@ function hasAccess(route, roles) {
 }
 
 /**
- * 判断对象是否含有 children
- * @param route 要判断的路由
+ * 判断节点对象是否含有元素个数大于0的 children 数组
+ * @param node 要判断的节点
  * @returns {Boolean}
  */
-export const hasChildren = route => {
-  return route.children && route.children.length
+export const hasChildren = node => {
+  return node.children && node.children.length
 }
 
 /**
@@ -89,27 +88,7 @@ export const nameInRoutes = (name, routes) => {
 }
 
 /**
- * 过滤菜单路由
- * @param routes 全部可访问路由列表
- */
-export const filterMenuRoutes = routes => {
-  let menuRoutes = []
-  routes.forEach(route => {
-    if (route.name === 'layout') {
-      if (hasChildren(route)) {
-        menuRoutes.push(...route.children)
-      }
-    } else {
-      if (!route.meta.hideInMenu) {
-        menuRoutes.push(route)
-      }
-    }
-  })
-  return menuRoutes
-}
-
-/**
- * 过滤菜单数组
+ * 依据可访问路由过滤菜单数组
  * @param menu 菜单列表
  * @param routes 全部可访问路由列表
  */
@@ -132,4 +111,33 @@ export const filterMenu = (menu, routes) => {
     }
   })
   return accessMenu
+}
+
+export const makePid = (item, id) => {
+  item.children.forEach(child => {
+    child.id = id++
+    // 为子节点设置 pid 便于根据当前路由 name 追溯生成面包屑导航
+    // 但是无法处理两个不同的菜单下包含相同 name 的子菜单的问题
+    // 因为根据当前路由映射当前菜单是根据路由的 name 属性来判定的
+    child.pid = item.id
+    if (hasChildren(child)) {
+      makePid(child, id)
+    }
+  })
+}
+
+/**
+ * 用于对已过滤的菜单做进一步处理，方便菜单列表索引和面包屑
+ * @param menu
+ */
+export const makeMenu = menu => {
+  let id = 0
+  menu.forEach(item => {
+    // 为每个菜单生成一个唯一 id 用于作为路由的索引
+    item.id = id++
+    if (hasChildren(item)) {
+      makePid(item, id)
+    }
+  })
+  return menu
 }

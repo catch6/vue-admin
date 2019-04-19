@@ -7,7 +7,7 @@
     "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
     "analyz": "npm_config_report=true vue-cli-service build",
-    "svg": "vsvg -s ./src/svg -t ./src/components/icons"
+    "svg": "vsvg -s ./src/svg -t ./src/components/Icons"
   },
   "dependencies": {
     "axios": "^0.18.0",

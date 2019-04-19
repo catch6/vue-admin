@@ -2,25 +2,15 @@
   <div class="layout-header clearfix">
     <div class="fl">
       <el-button type="text" @click="toggleCollapse">
-        <icon
-          name="menu"
-          scale="1"
-          :dir="isCollapse ? 'right' : 'top'"
-        ></icon>
+        <icon name="menu" scale="1" :dir="isCollapse ? 'right' : 'top'"></icon>
       </el-button>
       <el-button type="text" @click="toggleCollapse">
-        <icon
-          name="fullscreen"
-          scale="1"
-        ></icon>
+        <icon name="fullscreen" scale="1"></icon>
       </el-button>
     </div>
     <div class="fr">
       <el-button type="text" @click="toggleCollapse">
-        <icon
-          name="fullscreen"
-          scale="1"
-        ></icon>
+        <icon name="fullscreen" scale="1"></icon>
       </el-button>
     </div>
   </div>

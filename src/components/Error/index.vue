@@ -24,7 +24,7 @@ import svg404 from '@/assets/svg/404.svg'
 import svg500 from '@/assets/svg/500.svg'
 
 export default {
-  name: 'error',
+  name: 'Error',
   data() {
     return {
       code: this.$route.params.code || 404,

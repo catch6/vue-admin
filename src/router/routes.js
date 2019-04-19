@@ -52,7 +52,7 @@ export const dynamicRoutes = [
   {
     path: '*',
     redirect: '/error/404',
-    name: 'any',
+    name: 'Any',
     meta: {
       hideInMenu: true
     }
@@ -101,9 +101,9 @@ export const staticRoutes = [
   },
   {
     path: '/error/:code',
-    name: 'error',
+    name: 'Error',
     component: () =>
-      import(/* webpackChunkName: "error" */ '../components/error'),
+      import(/* webpackChunkName: "error" */ '../components/Error'),
     meta: {
       title: '错误',
       hideInMenu: true
