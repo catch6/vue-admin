@@ -141,3 +141,41 @@ export const makeMenu = menu => {
   })
   return menu
 }
+
+/**
+ * 返回属性等于输入值的菜单项
+ * @param menus 全部可用菜单
+ * @param name 查询的 name
+ * @returns {Boolean|Object}
+ */
+export const findMenu = (menus,key,value) => {
+  for (let menu of menus) {
+    if (menu[key] === value) {
+      return menu
+    } else {
+      if (menu.children) {
+        return findMenuByName(menu.children, name)
+      }
+    }
+  }
+  return false
+}
+
+/**
+ * 返回 name 属性等于输入值 name 的菜单项
+ * @param menus 全部可用菜单
+ * @param name 查询的 name
+ * @returns {Boolean|Object}
+ */
+export const findMenuByName = (menus, id) => {
+  for (let menu of menus) {
+    if (menu.name === name) {
+      return menu
+    } else {
+      if (menu.children) {
+        return findMenuByName(menu.children, name)
+      }
+    }
+  }
+  return false
+}

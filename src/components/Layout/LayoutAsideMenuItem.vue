@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import '@/components/icons'
+import '@/components/Icons'
 import { mapGetters } from 'vuex'
 
 export default {

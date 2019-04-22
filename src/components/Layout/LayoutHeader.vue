@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import '@/components/icons/menu'
-import '@/components/icons/fullscreen'
+import '@/components/Icons/menu'
+import '@/components/Icons/fullscreen'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
 
