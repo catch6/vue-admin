@@ -63,7 +63,7 @@ import { sendSmsCode } from '@/api/common'
 import { setToken } from '@/libs/util'
 
 export default {
-  name: 'register',
+  name: 'Register',
   data() {
     const validateMobile = (rule, value, callback) => {
       const reg = /^1[3456789]\d{9}$/

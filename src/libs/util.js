@@ -31,8 +31,8 @@ export const clearLogin = () => {
  * @param roles 用户角色列表
  */
 function hasAccess(route, roles) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
+  if (route.roles && route.roles.length) {
+    return roles.some(role => route.roles.includes(role))
   } else {
     return true
   }
@@ -88,16 +88,29 @@ export const nameInRoutes = (name, routes) => {
 }
 
 /**
- * 依据可访问路由过滤菜单数组
- * @param menu 菜单列表
- * @param routes 全部可访问路由列表
+ * 依据路由器过滤菜单数组
+ * @param menu 全部菜单列表
+ * @param router 已过滤动态路由的路由器对象
  */
-export const filterMenu = (menu, routes) => {
+export const filterMenu = (menu, router) => {
   let accessMenu = []
+  let accessAble = false
+  let route
   menu.forEach(item => {
-    if (nameInRoutes(item.name, routes)) {
+    if (item.path) {
+      route = router.resolve(item.path).route
+      if (route.path !== '/error/404') {
+        item.name = route.name
+        accessAble = true
+      } else {
+        accessAble = false
+      }
+    } else {
+      accessAble = true
+    }
+    if (accessAble) {
       if (hasChildren(item)) {
-        let accessChildrenMenu = filterMenu(item.children, routes)
+        const accessChildrenMenu = filterMenu(item.children, router)
         if (accessChildrenMenu.length) {
           item.children = accessChildrenMenu
           accessMenu.push(item)
@@ -113,69 +126,59 @@ export const filterMenu = (menu, routes) => {
   return accessMenu
 }
 
-export const makePid = (item, id) => {
-  item.children.forEach(child => {
-    child.id = id++
-    // 为子节点设置 pid 便于根据当前路由 name 追溯生成面包屑导航
-    // 但是无法处理两个不同的菜单下包含相同 name 的子菜单的问题
-    // 因为根据当前路由映射当前菜单是根据路由的 name 属性来判定的
-    child.pid = item.id
-    if (hasChildren(child)) {
-      makePid(child, id)
-    }
-  })
-}
-
 /**
  * 用于对已过滤的菜单做进一步处理，方便菜单列表索引和面包屑
  * @param menu
  */
-export const makeMenu = menu => {
+export const generateMenu = menu => {
   let id = 0
   menu.forEach(item => {
     // 为每个菜单生成一个唯一 id 用于作为路由的索引
     item.id = id++
     if (hasChildren(item)) {
-      makePid(item, id)
+      generatePid(item, id)
     }
   })
   return menu
 }
 
 /**
- * 返回属性等于输入值的菜单项
- * @param menus 全部可用菜单
- * @param name 查询的 name
- * @returns {Boolean|Object}
+ * 在对象的子对象上挂载此对象的 id
+ * @param item 父对象
+ * @param id 当前累计的id值
  */
-export const findMenu = (menus,key,value) => {
-  for (let menu of menus) {
-    if (menu[key] === value) {
-      return menu
-    } else {
-      if (menu.children) {
-        return findMenuByName(menu.children, name)
-      }
+export const generatePid = (item, id) => {
+  item.children.forEach(child => {
+    child.id = id++
+    // 为子节点设置 parent 便于根据当前路由追溯生成面包屑导航
+    // 但是无法处理两个不同的菜单下包含相同 name 的子菜单的问题
+    // 因为根据当前路由映射当前菜单是根据路由的 name 属性来判定的
+    child.parent = item
+    if (hasChildren(child)) {
+      generatePid(child, id)
     }
-  }
-  return false
+  })
 }
 
 /**
- * 返回 name 属性等于输入值 name 的菜单项
- * @param menus 全部可用菜单
- * @param name 查询的 name
- * @returns {Boolean|Object}
+ * 返回属性等于输入值的菜单项
+ * @param menu 全部可用菜单
+ * @param key 菜单属性名
+ * @param value 菜单属性值
+ * @returns {Boolean|Object|Null}
  */
-export const findMenuByName = (menus, id) => {
-  for (let menu of menus) {
-    if (menu.name === name) {
-      return menu
+export const findMenu = (menu, key, value) => {
+  for (let item of menu) {
+    if (item[key] && item[key] === value) {
+      return item
     } else {
-      if (menu.children) {
-        return findMenuByName(menu.children, name)
+      if (item.children) {
+        let menu = findMenu(item.children, key, value)
+        if (menu) {
+          return menu
+        }
       }
     }
   }
-  return false
+  return null
 }

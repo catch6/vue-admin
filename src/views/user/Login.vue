@@ -46,7 +46,7 @@ import { login } from '@/api/user'
 import { setToken } from '@/libs/util'
 
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
       form: {

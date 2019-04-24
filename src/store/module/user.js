@@ -1,23 +1,26 @@
 import { getUserInfo } from '@/api/user'
-import { filterMenu, makeMenu } from '@/libs/util'
 
 export default {
   namespaced: true,
   state: {
     roles: [],
-    menu: null
+    menu: null,
+    routes: null
   },
   getters: {
     roles: state => state.roles,
-    menu: state => state.menu
+    menu: state => state.menu,
+    routes: state => state.routes
   },
   mutations: {
     setRoles(state, roles) {
       state.roles = roles
     },
-    generateMenu(state, { allMenu, routes }) {
-      allMenu = filterMenu(allMenu, routes)
-      state.menu = makeMenu(allMenu)
+    setMenu(state, generatedMenu) {
+      state.menu = generatedMenu
+    },
+    setRoutes(state, routes) {
+      state.routes = routes
     }
   },
   actions: {

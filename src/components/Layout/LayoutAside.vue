@@ -1,7 +1,7 @@
 <template>
   <div class="layout-aside">
     <div class="layout-aside-logo">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/home">
         LOGO
       </router-link>
     </div>
@@ -14,7 +14,7 @@
         :collapse="isCollapse"
         background-color="#2c3e50"
         text-color="#ecf0f1"
-        active-text-color="#ffd04b"
+        active-text-color="#1890ff"
       >
         <layout-aside-menu-item
           v-for="item in menu"
@@ -29,18 +29,29 @@
 <script>
 import LayoutAsideMenuItem from './LayoutAsideMenuItem'
 import { mapGetters } from 'vuex'
+import { findMenu } from '@/libs/util'
 
 export default {
   name: 'LayoutAside',
   components: { LayoutAsideMenuItem },
   data() {
     return {
-      defaultActive: this.$route.name
+      defaultActive: ''
     }
   },
   computed: {
     ...mapGetters('user', ['menu']),
     ...mapGetters('layout', ['isCollapse'])
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        let curMenu = findMenu(this.menu, 'name', route.name)
+        console.log(curMenu)
+        this.defaultActive = `${curMenu.id}`
+      },
+      immediate: true
+    }
   }
 }
 </script>

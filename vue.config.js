@@ -3,11 +3,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const AliOSSPlugin = require('webpack-alioss-plugin')
-const path = require('path')
-
-const resolve = dir => {
-  return path.join(__dirname, dir)
-}
 
 module.exports = {
   productionSourceMap: false,
@@ -36,8 +31,10 @@ module.exports = {
           threshold: 10240
         })
       )
-      config.plugins.push(new AliOSSPlugin())
-      config.plugins.push(new BundleAnalyzerPlugin())
+      // config.plugins.push(new AliOSSPlugin())
+      if (process.env.npm_config_report) {
+        config.plugins.push(new BundleAnalyzerPlugin())
+      }
     } else {
       // 为开发环境修改配置...
     }

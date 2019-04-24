@@ -4,11 +4,13 @@ import { dynamicRoutes, staticRoutes } from './routes'
 import store from '@/store'
 import {
   filterDynamicRoutes,
+  filterMenu,
+  generateMenu,
   getToken,
   clearLogin,
   nameInRoutes
 } from '../libs/util'
-import allMenu from '@/router/menu'
+import menu from '@/router/menu'
 
 Vue.use(Router)
 
@@ -50,10 +52,9 @@ router.beforeEach((to, from, next) => {
           // 拉取用户信息，通过用户角色列表来加载具有权限的路由;
           const accessRoutes = filterDynamicRoutes(dynamicRoutes, user.roles)
           router.addRoutes(accessRoutes)
-          store.commit('user/generateMenu', {
-            allMenu,
-            routes: [...staticRoutes, ...accessRoutes]
-          })
+          const accessMenu = filterMenu(menu, router)
+          const generatedMenu = generateMenu(accessMenu)
+          store.commit('user/setMenu', generatedMenu)
           // 设置 replace: true 可以避免用户在返回的时候回退到登录页
           next({ ...to, replace: true })
         })
@@ -75,10 +76,10 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach(to => {
-  if (to.meta && to.meta.title) {
-    document.title = to.meta.title
-  }
-})
+// router.afterEach(to => {
+//   if (to.title) {
+//     document.title = to.title
+//   }
+// })
 
 export default router

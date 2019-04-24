@@ -1,100 +1,90 @@
-import Layout from '../components/Layout'
+import Layout from '@/components/Layout'
+// import Wrap from '@/components/Wrap'
+import UserLayout from '@/views/user/UserLayout'
 
 /**
- * 路由可配置参数
- meta: {
-    title: (default: 'admin') 标题
-    icon: (default: -) 该页面在左侧菜单、面包屑和标签导航处显示的图标，如果是自定义图标，需要在图标名称前加下划线'_'
-    hideInMenu: (default: false) 设为true后在左侧菜单不会显示该页面选项
-    hideInBread: (default: false) 设为true后在左侧菜单不会显示该页面选项
-    showAlways: (default: false) 设为true后如果该路由只有一个子路由，在菜单中也会显示该父级菜单
-    noCache: (default: false) 设为true后页面不会缓存
-    roles: (default: null) 可访问该页面的权限数组，当前路由设置的权限会影响子路由
-    href: 'https://xxx' (default: null) 用于跳转到外部连接
-  }
-
- 注意！所有组件（除了 layout ），必须父组件显示子组件才能显示
+ * 动态路由配置
+ * 注意：仅会对 name:'layout' 路由的 children 进行菜单渲染
+ * 路由可配置参数：
+ * meta:{
+ *   title：标题，用于文档标题、左侧导航栏和面包屑导航展示
+ *   icon：图标，用于导航栏和面包屑展示
+ *   cache：是否缓存组件 默认：true
+ *   roles：允许访问的角色列表，如 ['user','admin']，默认允许访问
+ *   showMenu：是否在左侧菜单展示 默认：false
+ *   showBread：是否展示面包屑导航 默认：true
+ * }
  */
-
 export const dynamicRoutes = [
   {
     path: '/layout',
     name: 'layout',
+    redirect: '/home',
     component: Layout,
-    meta: {
-      hideInMenu: true
-    },
     children: [
       {
         path: '/home',
         name: 'home',
         component: () => import(/* webpackChunkName: "home" */ '../views/home'),
-        meta: {
-          title: '主页',
-          icon: 'home',
-          hideInBread: true,
-          roles: ['admin']
-        }
+        roles: ['admin']
       },
       {
         path: '/a',
         name: 'A',
         component: () => import(/* webpackChunkName: "a" */ '../views/A'),
-        meta: {
-          title: 'A',
-          icon: 'menu',
-          hideInBread: true,
-          roles: ['super']
-        }
+        roles: ['admin'],
+        children: [
+          {
+            path: '/b',
+            name: 'B',
+            component: () => import(/* webpackChunkName: "a" */ '../views/B'),
+            roles: ['admin']
+          },
+          {
+            path: '/c',
+            name: 'C',
+            component: () => import(/* webpackChunkName: "a" */ '../views/C'),
+            roles: ['admin']
+          }
+        ]
       }
     ]
   },
   {
     path: '*',
     redirect: '/error/404',
-    name: 'Any',
-    meta: {
-      hideInMenu: true
-    }
+    name: 'Any'
   }
 ]
 
 export const staticRoutes = [
   {
     path: '/',
-    name: 'index',
-    redirect: '/login',
-    meta: {
-      hideInMenu: true
-    }
+    name: 'Index',
+    redirect: '/login'
   },
   {
-    path: '/base-layout',
-    name: 'base-layout',
-    component: () =>
-      import(/* webpackChunkName: "base-layout" */ '@/views/user/base-layout'),
-    meta: {
-      hideInMenu: true
-    },
+    path: '/user-layout',
+    name: 'UserLayout',
+    redirect: '/login',
+    component: UserLayout,
     children: [
       {
         path: '/login',
-        name: 'login',
+        name: 'Login',
         component: () =>
-          import(/* webpackChunkName: "login" */ '@/views/user/login'),
+          import(/* webpackChunkName: "user" */ '@/views/user/Login'),
         meta: {
-          title: '登录',
-          hideInMenu: true
+          title: '登录'
         }
       },
       {
         path: '/register',
-        name: 'register',
+        name: 'Register',
         component: () =>
-          import(/* webpackChunkName: "register" */ '@/views/user/register'),
+          import(/* webpackChunkName: "user" */ '@/views/user/Register'),
         meta: {
-          title: '注册',
-          hideInMenu: true
+          title: '注册'
         }
       }
     ]
@@ -103,10 +93,9 @@ export const staticRoutes = [
     path: '/error/:code',
     name: 'Error',
     component: () =>
-      import(/* webpackChunkName: "error" */ '../components/Error'),
+      import(/* webpackChunkName: "error" */ '@/components/Error'),
     meta: {
-      title: '错误',
-      hideInMenu: true
+      title: '错误'
     }
   }
 ]

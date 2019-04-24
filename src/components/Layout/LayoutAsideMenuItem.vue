@@ -1,25 +1,21 @@
 <template>
   <li class="layout-aside-menu-item">
-    <el-menu-item
-      v-if="!item.children"
-      :route="{ name: item.name }"
-      :index="`${item.id}`"
-    >
-      <icon :name="item.icon"></icon>
-      <span slot="title">{{ item.title }}</span>
-    </el-menu-item>
-    <el-submenu v-else :index="`${item.id}`">
+    <el-submenu v-if="item.children" :index="`${item.id}`">
       <template slot="title">
         <icon :name="item.icon"></icon>
         <span slot="title">{{ item.title }}</span>
       </template>
       <layout-aside-menu-item
         v-for="subItem in item.children"
-        :key="subItem.id"
         :item="subItem"
+        :key="subItem.id"
       >
       </layout-aside-menu-item>
     </el-submenu>
+    <el-menu-item v-else :route="item.path" :index="`${item.id}`">
+      <icon :name="item.icon"></icon>
+      <span slot="title">{{ item.title }}</span>
+    </el-menu-item>
   </li>
 </template>
 
