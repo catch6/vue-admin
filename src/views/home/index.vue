@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    111
+    home
     <el-button @click="logout">logout</el-button>
   </div>
 </template>
@@ -9,14 +9,14 @@
 import { clearLogin } from '@/libs/util'
 
 export default {
-  name: 'home',
+  name: 'Home',
   data() {
     return {}
   },
   methods: {
     logout() {
       clearLogin()
-      this.$router.push({ name: 'login' })
+      this.$router.push('/login')
     }
   }
 }

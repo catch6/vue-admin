@@ -4,23 +4,23 @@ export default {
   namespaced: true,
   state: {
     roles: [],
-    menu: null,
-    routes: null
+    menuRoutes: null,
+    cachePool: []
   },
   getters: {
     roles: state => state.roles,
-    menu: state => state.menu,
-    routes: state => state.routes
+    menuRoutes: state => state.menuRoutes,
+    cachePool: state => state.cachePool
   },
   mutations: {
     setRoles(state, roles) {
       state.roles = roles
     },
-    setMenu(state, generatedMenu) {
-      state.menu = generatedMenu
+    setMenuRoutes(state, menuRoutes) {
+      state.menuRoutes = menuRoutes
     },
-    setRoutes(state, routes) {
-      state.routes = routes
+    setCachePool(state, cachePool) {
+      state.cachePool = cachePool
     }
   },
   actions: {

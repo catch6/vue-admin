@@ -17,9 +17,9 @@
         active-text-color="#1890ff"
       >
         <layout-aside-menu-item
-          v-for="item in menu"
+          v-for="item in menuRoutes"
           :item="item"
-          :key="item.id"
+          :key="item.path"
         />
       </el-menu>
     </el-scrollbar>
@@ -29,28 +29,16 @@
 <script>
 import LayoutAsideMenuItem from './LayoutAsideMenuItem'
 import { mapGetters } from 'vuex'
-import { findMenu } from '@/libs/util'
 
 export default {
   name: 'LayoutAside',
   components: { LayoutAsideMenuItem },
-  data() {
-    return {
-      defaultActive: ''
-    }
-  },
   computed: {
-    ...mapGetters('user', ['menu']),
-    ...mapGetters('layout', ['isCollapse'])
-  },
-  watch: {
-    $route: {
-      handler(route) {
-        let curMenu = findMenu(this.menu, 'name', route.name)
-        console.log(curMenu)
-        this.defaultActive = `${curMenu.id}`
-      },
-      immediate: true
+    ...mapGetters('user', ['menuRoutes']),
+    ...mapGetters('layout', ['isCollapse']),
+    defaultActive() {
+      let matched = this.$route.matched
+      return matched[matched.length - 1].path
     }
   }
 }

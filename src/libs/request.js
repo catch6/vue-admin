@@ -44,7 +44,7 @@ request.interceptors.response.use(
             type: 'warning'
           }).then(() => {
             clearLogin()
-            router.push({ name: 'login' })
+            router.push('/login')
           })
           return Promise.reject(`${ret.code}:${ret.msg}`)
         default:

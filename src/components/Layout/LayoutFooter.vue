@@ -6,10 +6,7 @@
 
 <script>
 export default {
-  name: 'LayoutFooter',
-  data() {
-    return {}
-  }
+  name: 'LayoutFooter'
 }
 </script>
 

@@ -48,7 +48,7 @@
       <el-form-item>
         <span class="fr">
           已有账号？去
-          <router-link :to="{ name: 'login', query: $route.query }">
+          <router-link :to="{ name: 'Login', query: $route.query }">
             登录
           </router-link>
         </span>
@@ -120,14 +120,6 @@ export default {
       loading: false
     }
   },
-  watch: {
-    $route: {
-      handler(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
   methods: {
     handleSendSmsCode() {
       this.$refs.form.validateField('mobile', errorMobile => {
@@ -155,7 +147,7 @@ export default {
             .then(data => {
               setToken(data.token, this.form.remember ? 30 : 1)
               this.loading = false
-              this.$router.replace(this.redirect || { name: 'home' })
+              this.$router.replace(this.redirect || '/home')
             })
             .catch(error => {
               this.loading = false
@@ -165,7 +157,13 @@ export default {
           return false
         }
       })
+    },
+    initRedirect() {
+      this.redirect = this.$route.query && this.$route.query.redirect
     }
+  },
+  created() {
+    this.initRedirect()
   }
 }
 </script>

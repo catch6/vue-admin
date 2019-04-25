@@ -31,8 +31,8 @@ export const clearLogin = () => {
  * @param roles 用户角色列表
  */
 function hasAccess(route, roles) {
-  if (route.roles && route.roles.length) {
-    return roles.some(role => route.roles.includes(role))
+  if (route.meta && route.meta.roles && route.meta.roles.length) {
+    return roles.some(role => route.meta.roles.includes(role))
   } else {
     return true
   }
@@ -55,15 +55,64 @@ export const hasChildren = node => {
  */
 export const filterDynamicRoutes = (routes, roles) => {
   const accessRoutes = []
+  let children = []
   routes.forEach(route => {
     if (hasAccess(route, roles)) {
       if (hasChildren(route)) {
-        route.children = filterDynamicRoutes(route.children, roles)
+        children = filterDynamicRoutes(route.children, roles)
+        if (children.length) {
+          route.children = children
+        }
       }
       accessRoutes.push(route)
     }
   })
   return accessRoutes
+}
+
+/**
+ * 生成菜单路由列表，主要是为每个路由添加 parent 属性，方便面包屑导航
+ * @param accessRoutes 可访问路由列表
+ */
+export const generateMenuRoutes = accessRoutes => {
+  let routes = accessRoutes[0].children
+  routes.forEach(route => {
+    if (hasChildren(route)) {
+      generateParent(route)
+    }
+  })
+  return routes
+}
+
+/**
+ * 在子对象的 parent 上挂载父对象
+ * 为子节点设置 parent 便于根据当前路由追溯生成面包屑导航
+ * @param item
+ */
+export const generateParent = item => {
+  item.children.forEach(child => {
+    child.meta.parent = item
+    if (hasChildren(child)) {
+      generateParent(child)
+    }
+  })
+}
+
+/**
+ * 生成缓存池
+ * @param menuRoutes 菜单路由列表
+ */
+export const generateCachePool = menuRoutes => {
+  let cachePool = []
+  menuRoutes.forEach(route => {
+    if (!route.meta || route.meta.cache === undefined || route.meta.cache) {
+      cachePool.push(route.name)
+    }
+    if (hasChildren(route)) {
+      cachePool.concat(generateCachePool(route.children))
+    }
+  })
+  return cachePool
 }
 
 /**
@@ -85,100 +134,4 @@ export const nameInRoutes = (name, routes) => {
     }
   }
   return false
-}
-
-/**
- * 依据路由器过滤菜单数组
- * @param menu 全部菜单列表
- * @param router 已过滤动态路由的路由器对象
- */
-export const filterMenu = (menu, router) => {
-  let accessMenu = []
-  let accessAble = false
-  let route
-  menu.forEach(item => {
-    if (item.path) {
-      route = router.resolve(item.path).route
-      if (route.path !== '/error/404') {
-        item.name = route.name
-        accessAble = true
-      } else {
-        accessAble = false
-      }
-    } else {
-      accessAble = true
-    }
-    if (accessAble) {
-      if (hasChildren(item)) {
-        const accessChildrenMenu = filterMenu(item.children, router)
-        if (accessChildrenMenu.length) {
-          item.children = accessChildrenMenu
-          accessMenu.push(item)
-        } else {
-          delete item.children
-          accessMenu.push(item)
-        }
-      } else {
-        accessMenu.push(item)
-      }
-    }
-  })
-  return accessMenu
-}
-
-/**
- * 用于对已过滤的菜单做进一步处理，方便菜单列表索引和面包屑
- * @param menu
- */
-export const generateMenu = menu => {
-  let id = 0
-  menu.forEach(item => {
-    // 为每个菜单生成一个唯一 id 用于作为路由的索引
-    item.id = id++
-    if (hasChildren(item)) {
-      generatePid(item, id)
-    }
-  })
-  return menu
-}
-
-/**
- * 在对象的子对象上挂载此对象的 id
- * @param item 父对象
- * @param id 当前累计的id值
- */
-export const generatePid = (item, id) => {
-  item.children.forEach(child => {
-    child.id = id++
-    // 为子节点设置 parent 便于根据当前路由追溯生成面包屑导航
-    // 但是无法处理两个不同的菜单下包含相同 name 的子菜单的问题
-    // 因为根据当前路由映射当前菜单是根据路由的 name 属性来判定的
-    child.parent = item
-    if (hasChildren(child)) {
-      generatePid(child, id)
-    }
-  })
-}
-
-/**
- * 返回属性等于输入值的菜单项
- * @param menu 全部可用菜单
- * @param key 菜单属性名
- * @param value 菜单属性值
- * @returns {Boolean|Object|Null}
- */
-export const findMenu = (menu, key, value) => {
-  for (let item of menu) {
-    if (item[key] && item[key] === value) {
-      return item
-    } else {
-      if (item.children) {
-        let menu = findMenu(item.children, key, value)
-        if (menu) {
-          return menu
-        }
-      }
-    }
-  }
-  return null
 }

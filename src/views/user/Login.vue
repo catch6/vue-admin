@@ -32,7 +32,7 @@
       <el-form-item>
         <span class="fr">
           还没账号？去
-          <router-link :to="{ name: 'register', query: $route.query }">
+          <router-link :to="{ name: 'Register', query: $route.query }">
             注册
           </router-link>
         </span>
@@ -84,14 +84,6 @@ export default {
       loading: false
     }
   },
-  watch: {
-    $route: {
-      handler(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
   methods: {
     handleLogin() {
       this.$refs.form.validate(valid => {
@@ -101,7 +93,7 @@ export default {
             .then(data => {
               setToken(data.token, this.form.remember ? 30 : 1)
               this.loading = false
-              this.$router.replace(this.redirect || { name: 'home' })
+              this.$router.replace(this.redirect || '/home')
             })
             .catch(error => {
               this.loading = false
@@ -111,7 +103,13 @@ export default {
           return false
         }
       })
+    },
+    initRedirect() {
+      this.redirect = this.$route.query && this.$route.query.redirect
     }
+  },
+  created() {
+    this.initRedirect()
   }
 }
 </script>

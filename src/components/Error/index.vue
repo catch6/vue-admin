@@ -51,9 +51,9 @@ export default {
     handleToHome() {
       const token = getToken()
       if (token) {
-        this.$router.push({ name: 'home' })
+        this.$router.push('/home')
       } else {
-        this.$router.push({ name: 'login' })
+        this.$router.push('/login')
       }
     }
   },

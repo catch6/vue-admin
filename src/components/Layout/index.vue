@@ -17,10 +17,7 @@ import LayoutFooter from './LayoutFooter'
 
 export default {
   name: 'Layout',
-  components: { LayoutAside, LayoutHeader, LayoutMain, LayoutFooter },
-  data() {
-    return {}
-  }
+  components: { LayoutAside, LayoutHeader, LayoutMain, LayoutFooter }
 }
 </script>
 

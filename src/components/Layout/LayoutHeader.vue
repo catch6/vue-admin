@@ -19,14 +19,10 @@
 <script>
 import '@/components/Icons/menu'
 import '@/components/Icons/fullscreen'
-import { mapGetters } from 'vuex'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'LayoutHeader',
-  data() {
-    return {}
-  },
   computed: {
     ...mapGetters('layout', ['isCollapse'])
   },
