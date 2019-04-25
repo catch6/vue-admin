@@ -1,7 +1,7 @@
 <h1 align="center">vue-admin</h1>
 <p align="center">
 <br>
-一个简单易于食用的后端管理框架
+一个简单易于使用的后端管理框架
 <br><br>
 <a title="MIT" target="_blank" href="https://opensource.org/licenses/MIT"><img src="http://img.shields.io/badge/license-MIT-orange.svg?style=flat-square"></a>
 <a title="Code Size" target="_blank" href="https://github.com/CatchLife/vue-admin"><img src="https://img.shields.io/github/languages/code-size/CatchLife/vue-admin.svg?style=flat-square"></a>
