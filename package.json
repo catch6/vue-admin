@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode dev",
-    "build": "vue-cli-service build --mode prod",
+    "serve": "mode=dev vue-cli-service serve --mode dev",
+    "build": "mode=prod vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
-    "analyz": "vue-cli-service build --mode prod --report",
+    "analyz": "mode=analyz vue-cli-service build --mode prod --report",
     "svg": "vsvg -s ./src/svg -t ./src/components/Icons"
   },
   "dependencies": {
@@ -30,10 +30,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.21",
-    "clean-webpack-plugin": "^2.0.1",
-    "compression-webpack-plugin": "^2.0.0",
     "vue-svgicon": "^3.2.6",
-    "webpack-alioss-plugin": "^2.1.0",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "webpack-alioss-plugin": "^2.1.0"
   }
 }
