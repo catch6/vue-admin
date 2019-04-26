@@ -2,27 +2,28 @@
   <div class="layout-header clearfix">
     <div class="fl">
       <el-button type="text" @click="toggleCollapse">
-        <icon name="menu" scale="1" :dir="isCollapse ? 'right' : 'top'"></icon>
-      </el-button>
-      <el-button type="text" @click="toggleCollapse">
-        <icon name="fullscreen" scale="1"></icon>
+        <icon
+          name="menu"
+          scale="1.2"
+          :dir="isCollapse ? 'right' : 'top'"
+        ></icon>
       </el-button>
     </div>
     <div class="fr">
-      <el-button type="text" @click="toggleCollapse">
-        <icon name="fullscreen" scale="1"></icon>
-      </el-button>
+      <full-screen></full-screen>
+      <layout-header-user></layout-header-user>
     </div>
   </div>
 </template>
 
 <script>
-import '@/components/Icons/menu'
-import '@/components/Icons/fullscreen'
 import { mapGetters, mapMutations } from 'vuex'
+import FullScreen from '@/components/FullScreen'
+import LayoutHeaderUser from './LayoutHeaderUser'
 
 export default {
   name: 'LayoutHeader',
+  components: { FullScreen, LayoutHeaderUser },
   computed: {
     ...mapGetters('layout', ['isCollapse'])
   },
@@ -39,6 +40,7 @@ export default {
   line-height 60px
   box-shadow 0 2px 2px rgba(7, 17, 27, .1)
   padding 0 20px
+  background-color #fff
   .el-button
     color black
     &:hover

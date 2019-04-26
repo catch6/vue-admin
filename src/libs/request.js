@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { getToken, clearLogin } from './util'
+import { clearLogin, getToken } from './util'
 import { stringify } from 'qs'
 import { MessageBox } from 'element-ui'
-import router from '@/router'
 
 const request = axios.create({
   baseURL: process.env.VUE_APP_SERVER_BASE_URL,
@@ -44,7 +43,7 @@ request.interceptors.response.use(
             type: 'warning'
           }).then(() => {
             clearLogin()
-            router.push('/login')
+            location.href = '/login'
           })
           return Promise.reject(`${ret.code}:${ret.msg}`)
         default:

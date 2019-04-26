@@ -2,7 +2,7 @@
   <li class="layout-aside-menu-item">
     <el-submenu v-if="item.children" :index="item.path">
       <template slot="title">
-        <icon :name="item.meta.icon"></icon>
+        <icon :name="item.meta.icon" scale="0.8"></icon>
         <span slot="title">{{ item.meta.title }}</span>
       </template>
       <layout-aside-menu-item
@@ -13,14 +13,13 @@
       </layout-aside-menu-item>
     </el-submenu>
     <el-menu-item v-else :route="item.path" :index="item.path">
-      <icon :name="item.meta.icon"></icon>
+      <icon :name="item.meta.icon" scale="0.8"></icon>
       <span slot="title">{{ item.meta.title }}</span>
     </el-menu-item>
   </li>
 </template>
 
 <script>
-import '@/components/Icons'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -35,8 +34,6 @@ export default {
 <style lang="stylus" scoped>
 .layout-aside-menu-item
   .svg-icon
-    width 18px
-    height 18px
     & + span
       margin-left 10px
 </style>
@@ -44,11 +41,11 @@ export default {
 .el-menu--collapse
   .el-submenu > .el-submenu__title
     span
-      height: 0;
-      width: 0;
-      overflow: hidden;
-      visibility: hidden;
-      display: inline-block;
+      height 0
+      width 0
+      overflow hidden
+      visibility hidden
+      display inline-block
     .el-submenu__icon-arrow
       display none
 </style>

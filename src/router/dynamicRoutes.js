@@ -33,33 +33,46 @@ const dynamicRoutes = [
         }
       },
       {
-        path: '/a',
-        name: 'A',
-        redirect: '/b',
+        path: '/menu1',
+        name: 'menu1',
+        redirect: '/menu1-1-1',
         component: Wrap,
         meta: {
-          title: 'a',
-          icon: 'home',
+          title: '一级菜单',
+          icon: 'nested',
           roles: ['admin']
         },
         children: [
           {
-            path: '/b',
-            name: 'B',
-            component: () => import(/* webpackChunkName: "a" */ '../views/b'),
+            path: '/menu1-1',
+            name: 'menu1-1',
+            redirect: '/menu1-1-1',
+            component: Wrap,
             meta: {
-              title: 'b',
-              icon: 'home',
+              title: '二级菜单1',
+              icon: 'nested',
               roles: ['admin']
-            }
+            },
+            children: [
+              {
+                path: '/menu1-1-1',
+                name: 'menu1-1-1',
+                component: () => import(/* webpackChunkName: "menu1" */ '../views/nested/menu1-1-1'),
+                meta: {
+                  title: '三级菜单1',
+                  icon: 'nested',
+                  roles: ['admin']
+                }
+              }
+            ]
           },
           {
-            path: '/c',
-            name: 'C',
-            component: () => import(/* webpackChunkName: "a" */ '../views/c'),
+            path: '/menu1-2',
+            name: 'menu1-2',
+            component: () => import(/* webpackChunkName: "menu1" */ '../views/nested/menu1-2'),
             meta: {
-              title: 'c',
-              icon: 'home',
+              title: '二级菜单2',
+              icon: 'nested',
               roles: ['admin']
             }
           }

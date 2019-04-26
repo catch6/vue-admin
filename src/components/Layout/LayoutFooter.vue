@@ -13,8 +13,8 @@ export default {
 <style lang="stylus" scoped>
 .layout-footer
   background-color #f0f0f0
-  height 50px
-  line-height 50px
+  height 35px
+  line-height 35px
   text-align center
   color #9ea7b4
 </style>

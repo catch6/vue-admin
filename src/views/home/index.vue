@@ -1,7 +1,6 @@
 <template>
-  <div class="home">
-    home
-    <el-button @click="logout">logout</el-button>
+  <div class="home basic">
+    <h1>首页</h1>
   </div>
 </template>
 
@@ -16,10 +15,16 @@ export default {
   methods: {
     logout() {
       clearLogin()
-      this.$router.push('/login')
+      location.href = '/login'
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.home
+  height 100%
+  display flex
+  justify-content center
+  align-items center
+</style>

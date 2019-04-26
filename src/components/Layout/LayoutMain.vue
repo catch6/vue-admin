@@ -5,10 +5,10 @@
         <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
         <el-breadcrumb-item
           v-for="bread in breadcrumbs"
-          :to="bread.path"
+          :to="bread.redirect ? '' : bread.path"
           :key="bread.path"
         >
-          {{ bread.title }}
+          {{ bread.meta.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -38,10 +38,7 @@ export default {
   methods: {
     generateBreadcrumbs(route, breads) {
       if (route.name !== 'Home') {
-        breads.unshift({
-          path: route.path,
-          title: route.meta.title
-        })
+        breads.unshift(route)
       }
       if (route.meta.parent) {
         breads.concat(this.generateBreadcrumbs(route.meta.parent, breads))
@@ -54,9 +51,22 @@ export default {
 
 <style lang="stylus" scoped>
 .layout-main
+  display flex
+  flex-direction column
   flex 1
   background-color #f0f0f0
   padding 10px 15px 0
   .layout-breadcrumb
     padding 0 0 10px
+  .layout-container
+    flex 1
+</style>
+<style lang="stylus">
+.layout-main
+  .layout-container
+    & > .basic
+      background-color #fff
+      height 100%
+      max-height 100%
+      overflow auto
 </style>

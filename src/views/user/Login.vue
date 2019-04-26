@@ -96,8 +96,8 @@ export default {
               this.$router.replace(this.redirect || '/home')
             })
             .catch(error => {
-              this.loading = false
               console.error(error)
+              this.loading = false
             })
         } else {
           return false

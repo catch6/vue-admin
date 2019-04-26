@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie'
-import store from '@/store'
 import { resetRouter } from '@/router'
 
 const TOKEN_KEY = 'token'
@@ -21,7 +20,6 @@ export const removeToken = () => {
  */
 export const clearLogin = () => {
   removeToken()
-  store.commit('user/setRoles', [])
   resetRouter()
 }
 
