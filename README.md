@@ -9,30 +9,35 @@
 <a title="Hits" target="_blank" href="http://hits.dwyl.io/CatchLife/vue-admin"><img src="http://hits.dwyl.io/CatchLife/vue-admin.svg"></a>
 </p>
 
-## Project setup
+## 截图
+![登录](https://i.loli.net/2019/04/26/5cc2d633d1af6.jpg)
+
+![首页](https://i.loli.net/2019/04/26/5cc2d633e40ab.jpg)
+
+## 使用说明
+
 ```
-yarn install
+git clone https://github.com/CatchLife/vue-admin.git
+
+cd vue-admin
+
+yarn
 ```
 
-### Compiles and hot-reloads for development
+### 开发
+
 ```
 yarn run serve
 ```
 
-### Compiles and minifies for production
+### 构建
+
 ```
 yarn run build
 ```
 
-### Run your tests
-```
-yarn run test
-```
+### 构建 svg-icon
 
-### Lints and fixes files
 ```
-yarn run lint
+yarn run svg
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

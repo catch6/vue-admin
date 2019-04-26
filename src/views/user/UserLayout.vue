@@ -6,7 +6,7 @@
           Vue Admin
         </div>
         <div class="user-layout-top-desc">
-          一个简单且易于食用的后端框架
+          一个简单且易于使用的后端框架
         </div>
       </div>
       <div class="user-layout-main">
