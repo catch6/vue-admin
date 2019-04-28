@@ -149,7 +149,7 @@ export default {
               this.loading = false
               this.$router.replace(this.redirect || '/home')
             })
-            .catch(error => {
+            .catch(() => {
               this.loading = false
             })
         } else {
