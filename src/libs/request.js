@@ -7,9 +7,10 @@ const request = axios.create({
   baseURL: process.env.VUE_APP_SERVER_BASE_URL,
   headers: {
     post: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     }
-  }
+  },
+  timeout: 5000
 })
 
 // 请求拦截器
@@ -18,7 +19,11 @@ request.interceptors.request.use(
     const token = getToken()
     if (token) {
       // 让每个请求携带token
-      config.data = { ...config.data, token }
+      if (config.method === 'get') {
+        config.params = { ...config.params, token }
+      } else {
+        config.data = { ...config.data, token }
+      }
     }
     config.data = stringify(config.data, { arrayFormat: 'brackets' })
     return config

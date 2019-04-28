@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import { resetRouter } from '@/router'
 
+Cookies.defaults = { expires: 9999 }
 const TOKEN_KEY = 'token'
 
 export const getToken = () => {

@@ -62,8 +62,6 @@ router.beforeEach((to, from, next) => {
         })
         .catch(error => {
           console.error(error)
-          clearLogin()
-          location.href = `/login?redirect=${to.path}`
         })
     }
   } else {
