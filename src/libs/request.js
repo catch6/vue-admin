@@ -23,9 +23,9 @@ request.interceptors.request.use(
         config.params = { ...config.params, token }
       } else {
         config.data = { ...config.data, token }
-        config.data = stringify(config.data, { arrayFormat: 'brackets' })
       }
     }
+    config.data = stringify(config.data, { arrayFormat: 'brackets' })
     return config
   },
   error => {
