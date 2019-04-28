@@ -61,6 +61,8 @@ export const filterDynamicRoutes = (routes, roles) => {
         children = filterDynamicRoutes(route.children, roles)
         if (children.length) {
           route.children = children
+        } else {
+          delete route.children
         }
       }
       accessRoutes.push(route)
@@ -75,11 +77,15 @@ export const filterDynamicRoutes = (routes, roles) => {
  */
 export const generateMenuRoutes = accessRoutes => {
   let routes = accessRoutes[0].children
-  routes.forEach(route => {
-    if (hasChildren(route)) {
-      generateParent(route)
-    }
-  })
+  if (routes) {
+    routes.forEach(route => {
+      if (hasChildren(route)) {
+        generateParent(route)
+      }
+    })
+  } else {
+    routes = []
+  }
   return routes
 }
 

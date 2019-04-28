@@ -3,14 +3,7 @@ import Router from 'vue-router'
 import staticRoutes from './staticRoutes'
 import dynamicRoutes from './dynamicRoutes'
 import store from '@/store'
-import {
-  clearLogin,
-  filterDynamicRoutes,
-  generateCachePool,
-  generateMenuRoutes,
-  getToken,
-  nameInRoutes
-} from '../libs/util'
+import { filterDynamicRoutes, generateCachePool, generateMenuRoutes, getToken, nameInRoutes } from '../libs/util'
 
 Vue.use(Router)
 
@@ -54,6 +47,9 @@ router.beforeEach((to, from, next) => {
           const accessRoutes = filterDynamicRoutes(dynamicRoutes, user.roles)
           router.addRoutes(accessRoutes)
           const menuRoutes = generateMenuRoutes(accessRoutes)
+          if (!menuRoutes.length) {
+            console.error('你至少要为 Layout 组件设置一个可访问的子路由')
+          }
           const cachePool = generateCachePool(menuRoutes)
           store.commit('user/setMenuRoutes', menuRoutes)
           store.commit('user/setCachePool', cachePool)
