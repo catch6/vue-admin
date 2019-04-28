@@ -150,7 +150,6 @@ export default {
               this.$router.replace(this.redirect || '/home')
             })
             .catch(error => {
-              console.error(error)
               this.loading = false
             })
         } else {
