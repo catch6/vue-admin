@@ -3,11 +3,12 @@
     <h3 class="login-title">登录</h3>
     <el-form :model="form" :rules="rules" ref="form">
       <el-form-item prop="mobile">
-        <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
+        <el-input v-model="form.mobile" tabindex="1" placeholder="请输入手机号"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           v-model="form.password"
+          tabindex="2"
           type="password"
           show-password
           placeholder="请输入密码"
@@ -23,6 +24,7 @@
         <el-button
           class="login-button"
           type="primary"
+          tabindex="3"
           @click="handleLogin"
           :loading="loading"
         >

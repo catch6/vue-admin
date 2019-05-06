@@ -3,11 +3,12 @@
     <h3 class="register-title">注册</h3>
     <el-form :model="form" :rules="rules" ref="form">
       <el-form-item prop="mobile">
-        <el-input v-model="form.mobile" placeholder="请输入手机号"></el-input>
+        <el-input v-model="form.mobile" tabindex="1" placeholder="请输入手机号"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input
           v-model="form.password"
+          tabindex="2"
           type="password"
           show-password
           placeholder="请输入密码"
@@ -18,6 +19,7 @@
       <el-form-item prop="smsCode">
         <el-input
           v-model="form.smsCode"
+          tabindex="3"
           placeholder="请输入短信验证码"
           class="sms-code-input"
         >
@@ -27,6 +29,7 @@
           class="sms-code-btn"
           :disabled="timerSeconds !== 0"
           @click="handleSendSmsCode"
+          tabindex="4"
           v-text="
             timerSeconds === 0 ? '发送验证码' : `重新发送 (${timerSeconds}s)`
           "
@@ -41,6 +44,7 @@
           type="primary"
           @click="handleRegister"
           :loading="loading"
+          tabindex="5"
         >
           注册
         </el-button>
