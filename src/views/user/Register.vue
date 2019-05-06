@@ -12,7 +12,6 @@
           type="password"
           show-password
           placeholder="请输入密码"
-          @keyup.enter.native="handleLogin"
         >
         </el-input>
       </el-form-item>
@@ -22,6 +21,7 @@
           tabindex="3"
           placeholder="请输入短信验证码"
           class="sms-code-input"
+          @keyup.enter.native="handleRegister"
         >
         </el-input>
         <el-button
@@ -36,7 +36,7 @@
         ></el-button>
       </el-form-item>
       <el-form-item>
-        <el-checkbox v-model="form.remember">在本设备保存登录状态</el-checkbox>
+        <el-checkbox v-model="form.remember" tabindex="5">在本设备保存登录状态</el-checkbox>
       </el-form-item>
       <el-form-item class="register-button-wrapper">
         <el-button
@@ -44,7 +44,6 @@
           type="primary"
           @click="handleRegister"
           :loading="loading"
-          tabindex="5"
         >
           注册
         </el-button>

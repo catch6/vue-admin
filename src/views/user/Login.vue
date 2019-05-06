@@ -17,14 +17,13 @@
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-checkbox v-model="form.remember">在本设备保存登录状态</el-checkbox>
+        <el-checkbox v-model="form.remember" tabindex="3">在本设备保存登录状态</el-checkbox>
         <a class="fr" href="/">忘记密码</a>
       </el-form-item>
       <el-form-item class="login-button-wrapper">
         <el-button
           class="login-button"
           type="primary"
-          tabindex="3"
           @click="handleLogin"
           :loading="loading"
         >
