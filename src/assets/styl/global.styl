@@ -1,5 +1,3 @@
-@import "./util.styl"
-
 full-size()
   width 100%
   height 100%
@@ -28,6 +26,21 @@ body
     color #1890ff
     text-decoration none
     outline 0
-    transition color .3s
-    
-
+    transition color 300ms
+  .fl
+    float left
+  .fr
+    float right
+  .fa-icon
+    width auto
+    height 1em /* 或任意其它字体大小相对值 */
+    /* 要在 Safari 中正常工作，需要再引入如下两行代码 */
+    max-width 100%
+    max-height 100%
+    transform rotateZ(0deg)
+    transition transform 500ms
+    vertical-align middle
+    &.rotate-90
+      transform rotateZ(90deg)
+  .pointer
+    cursor pointer

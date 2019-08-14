@@ -39,7 +39,7 @@ const dynamicRoutes = [
         component: Wrap,
         meta: {
           title: '一级菜单',
-          icon: 'nested',
+          icon: 'home',
           roles: ['admin']
         },
         children: [
@@ -50,7 +50,7 @@ const dynamicRoutes = [
             component: Wrap,
             meta: {
               title: '二级菜单1',
-              icon: 'nested',
+              icon: 'home',
               roles: ['admin']
             },
             children: [
@@ -60,7 +60,7 @@ const dynamicRoutes = [
                 component: () => import(/* webpackChunkName: "menu1" */ '../views/nested/menu1-1-1'),
                 meta: {
                   title: '三级菜单1',
-                  icon: 'nested',
+                  icon: 'home',
                   roles: ['admin']
                 }
               }
@@ -72,7 +72,7 @@ const dynamicRoutes = [
             component: () => import(/* webpackChunkName: "menu1" */ '../views/nested/menu1-2'),
             meta: {
               title: '二级菜单2',
-              icon: 'nested',
+              icon: 'home',
               roles: ['admin']
             }
           }

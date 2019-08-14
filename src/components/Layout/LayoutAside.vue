@@ -7,14 +7,11 @@
     </div>
     <el-scrollbar class="layout-aside-scrollbar">
       <el-menu
-        :class="['layout-aside-menu', isCollapse ? 'collapse' : '']"
+        class="layout-aside-menu"
         :default-active="defaultActive"
         router
         unique-opened
         :collapse="isCollapse"
-        background-color="#2c3e50"
-        text-color="#ecf0f1"
-        active-text-color="#1890ff"
       >
         <layout-aside-menu-item
           v-for="item in menuRoutes"
@@ -28,11 +25,11 @@
 
 <script>
 import LayoutAsideMenuItem from './LayoutAsideMenuItem'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'LayoutAside',
-  components: { LayoutAsideMenuItem },
+  components: {LayoutAsideMenuItem},
   computed: {
     ...mapGetters('user', ['menuRoutes']),
     ...mapGetters('layout', ['isCollapse']),
@@ -48,7 +45,7 @@ export default {
 .layout-aside
   height 100vh
   user-select none
-  background-color #2c3e50
+  background-color #fff
   .layout-aside-logo
     height 60px
     line-height 60px
@@ -59,14 +56,16 @@ export default {
   .layout-aside-scrollbar
     height calc(100vh - 60px)
     overflow-x hidden
-    padding-left 5px
     .layout-aside-menu
+      min-width 75px
       border-right none
-      &:not(.el-menu--collapse)
-        width 220px
 </style>
 
 <style lang="stylus">
 .el-scrollbar__wrap
   overflow-x hidden !important
+
+.layout-aside-menu:not(.el-menu--collapse)
+  width 220px
+  min-height calc(100vh - 60px)
 </style>

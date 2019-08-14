@@ -1,17 +1,11 @@
 <template>
-  <el-button
-    type="text"
-    @click="toggleFullScreen"
+  <v-icon
     v-if="show"
-    class="full-screen"
-  >
-    <el-tooltip :content="isFullScreen?'退出全屏':'全屏'" placement="bottom">
-      <icon
-        :name="isFullScreen ? 'fullscreen-exit' : 'fullscreen'"
-        scale="1.2"
-      ></icon>
-    </el-tooltip>
-  </el-button>
+    :name="isFullScreen ? 'compress-arrows-alt' : 'expand-arrows-alt'"
+    scale="1.2"
+    class="pointer"
+    @click.native="toggleFullScreen"
+  ></v-icon>
 </template>
 
 <script>
@@ -57,7 +51,3 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-.full-screen
-  margin-right 5px
-</style>
