@@ -40,7 +40,7 @@ export default {
   height 60px
   line-height 60px
   padding 0 20px
-  box-shadow 0 2px 2px rgba(7, 17, 27, .1)
+  box-shadow 0 2px 6px rgb(77, 174, 254, 0.3)
   vertical-align middle
   background-image linear-gradient(to right, #4facfe 0%, #00f2fe 50%, #4facfe 100%)
   color #fff
