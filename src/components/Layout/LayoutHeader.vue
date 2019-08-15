@@ -2,27 +2,27 @@
   <div class="layout-header">
     <div class="layout-header-left">
       <v-icon
-          name="bars"
-          scale="1.5"
-          :class="{'rotate-90':isCollapse , 'pointer':true }"
-          @click.native="toggleCollapse"
+        name="bars"
+        scale="1.5"
+        :class="{'rotate-90':isCollapse , 'pointer':true }"
+        @click.native="toggleCollapse"
       ></v-icon>
     </div>
     <div class="layout-header-right">
-      <full-screen class="full-screen"></full-screen>
+      <full-screen></full-screen>
       <layout-header-user></layout-header-user>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import FullScreen from '@/components/FullScreen'
 import LayoutHeaderUser from './LayoutHeaderUser'
 
 export default {
   name: 'LayoutHeader',
-  components: {FullScreen, LayoutHeaderUser},
+  components: { FullScreen, LayoutHeaderUser },
   computed: {
     ...mapGetters('layout', ['isCollapse'])
   },

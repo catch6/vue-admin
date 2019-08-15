@@ -1,12 +1,12 @@
 <template>
-  <section class="layout">
+  <div class="layout">
     <layout-aside></layout-aside>
-    <section class="layout-container">
+    <div class="layout-container">
       <layout-header></layout-header>
       <layout-main></layout-main>
       <layout-footer></layout-footer>
-    </section>
-  </section>
+    </div>
+  </div>
 </template>
 
 <script>

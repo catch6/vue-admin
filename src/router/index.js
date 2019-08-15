@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import staticRoutes from './staticRoutes'
 import dynamicRoutes from './dynamicRoutes'
 import store from '@/store'
-import { filterDynamicRoutes, generateCachePool, generateMenuRoutes, getToken, nameInRoutes } from '../libs/util'
+import { filterDynamicRoutes, generateCachePool, generateMenuRoutes, getToken, nameInRoutes } from '../assets/js/util'
 
 Vue.use(Router)
 

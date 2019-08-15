@@ -16,7 +16,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-import {clearLogin} from '@/libs/util'
+import {clearLogin} from '@/assets/js/util'
 
 export default {
   name: 'LayoutHeaderUser',

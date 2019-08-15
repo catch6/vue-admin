@@ -11,13 +11,11 @@
         :default-active="defaultActive"
         router
         unique-opened
-        :collapse="isCollapse"
-      >
+        :collapse="isCollapse">
         <layout-aside-menu-item
           v-for="item in menuRoutes"
           :item="item"
-          :key="item.path"
-        />
+          :key="item.path"/>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -25,11 +23,11 @@
 
 <script>
 import LayoutAsideMenuItem from './LayoutAsideMenuItem'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'LayoutAside',
-  components: {LayoutAsideMenuItem},
+  components: { LayoutAsideMenuItem },
   computed: {
     ...mapGetters('user', ['menuRoutes']),
     ...mapGetters('layout', ['isCollapse']),

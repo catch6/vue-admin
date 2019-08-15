@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { getToken } from '@/libs/util'
+import { getToken } from '@/assets/js/util'
 import svg403 from '@/assets/svg/403.svg'
 import svg404 from '@/assets/svg/404.svg'
 import svg500 from '@/assets/svg/500.svg'

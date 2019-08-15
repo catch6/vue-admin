@@ -1,7 +1,7 @@
 <template>
   <v-icon
     v-if="show"
-    :name="isFullScreen ? 'compress-arrows-alt' : 'expand-arrows-alt'"
+    :name="isFullScreen ? 'compress' : 'expand'"
     scale="1.2"
     class="pointer"
     @click.native="toggleFullScreen"

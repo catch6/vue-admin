@@ -1,4 +1,4 @@
-import request from '@/libs/request'
+import request from '@/assets/js/request'
 
 export const sendSmsCode = mobile => {
   return request({

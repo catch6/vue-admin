@@ -63,7 +63,7 @@
 <script>
 import { register } from '@/api/user'
 import { sendSmsCode } from '@/api/common'
-import { setToken } from '@/libs/util'
+import { setToken } from '@/assets/js/util'
 
 export default {
   name: 'Register',

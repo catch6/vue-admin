@@ -44,7 +44,7 @@
 
 <script>
 import { login } from '@/api/user'
-import { setToken } from '@/libs/util'
+import { setToken } from '@/assets/js/util'
 
 export default {
   name: 'Login',
