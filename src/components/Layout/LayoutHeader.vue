@@ -44,6 +44,6 @@ export default {
   vertical-align middle
   background-image linear-gradient(to right, #4facfe 0%, #00f2fe 50%, #4facfe 100%)
   color #fff
-  .layout-header-left
-    margin-right auto
+  .layout-header-right
+    margin-left auto
 </style>

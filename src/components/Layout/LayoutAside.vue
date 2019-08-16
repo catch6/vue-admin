@@ -41,6 +41,7 @@ export default {
 
 <style lang="stylus" scoped>
 .layout-aside
+  z-index 99999
   height 100vh
   user-select none
   background-color #fff
