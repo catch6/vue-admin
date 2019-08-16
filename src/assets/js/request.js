@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { clearLogin, getToken } from './util'
 import { stringify } from 'qs'
-import { MessageBox } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 
 const request = axios.create({
   baseURL: process.env.VUE_APP_SERVER_BASE_URL,
@@ -52,9 +52,11 @@ request.interceptors.response.use(
           })
           return Promise.reject(`${ret.code}:${ret.msg}`)
         default:
+          Message.error(`${ret.code}:${ret.msg}`)
           return Promise.reject(`${ret.code}:${ret.msg}`)
       }
     } else {
+      Message.error('未返回code')
       return Promise.reject('未返回code')
     }
   },
