@@ -16,7 +16,6 @@ export default {
 
 <style lang="stylus" scoped>
 .home
-  height 100%
   display flex
   justify-content center
   align-items center

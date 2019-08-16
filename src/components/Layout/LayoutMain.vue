@@ -61,12 +61,17 @@ export default {
   .layout-container
     flex 1
 </style>
+
 <style lang="stylus">
 .layout-main
   .layout-container
+    overflow auto
     & > .basic
+      display inline-block
       background-color #fff
-      height 100%
-      max-height 100%
-      overflow auto
+      width auto
+      height auto
+      padding 20px 15px
+      min-width 100%
+      min-height 100%
 </style>

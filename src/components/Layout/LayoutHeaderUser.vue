@@ -2,7 +2,7 @@
   <el-dropdown class="layout-header-user" @command="handleCommand">
     <div>
       <img class="avatar" :src="avatar" alt=""/>
-      <span class="username">{{ username }}</span>
+      <span class="username">{{ nickname }}</span>
       <i class="el-icon-arrow-down el-icon--right"></i>
     </div>
     <el-dropdown-menu slot="dropdown">
@@ -15,13 +15,13 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import {clearLogin} from '@/assets/js/util'
+import { mapGetters } from 'vuex'
+import { clearLogin } from '@/assets/js/util'
 
 export default {
   name: 'LayoutHeaderUser',
   computed: {
-    ...mapGetters('user', ['avatar', 'username'])
+    ...mapGetters('user', ['avatar', 'nickname'])
   },
   methods: {
     handleCommand(command) {
