@@ -4,10 +4,9 @@
       <el-breadcrumb>
         <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
         <el-breadcrumb-item
-          v-for="bread in breadcrumbs"
-          :to="bread.redirect ? '' : bread.path"
-          :key="bread.path"
-        >
+            v-for="bread in breadcrumbs"
+            :to="bread.redirect ? '' : bread.path"
+            :key="bread.path">
           {{ bread.meta.title }}
         </el-breadcrumb-item>
       </el-breadcrumb>
@@ -21,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'LayoutMain',
@@ -54,24 +53,28 @@ export default {
   display flex
   flex-direction column
   flex 1
+  width 100%
+  height 0
   background-color #f0f0f0
   padding 10px 15px 0
   .layout-breadcrumb
     padding 0 0 10px
   .layout-container
     flex 1
+    width 100%
+    height 0
+    overflow auto
 </style>
 
 <style lang="stylus">
 .layout-main
   .layout-container
-    overflow auto
     & > .basic
-      display inline-block
       background-color #fff
+      padding 20px 15px
       width auto
       height auto
-      padding 20px 15px
       min-width 100%
       min-height 100%
 </style>
+
