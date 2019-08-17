@@ -1,4 +1,4 @@
-import { getUserInfo } from '@/api/user'
+import {getUserInfo} from '@/api/user'
 
 export default {
   namespaced: true,
@@ -37,22 +37,18 @@ export default {
     /**
      * 获取用户相关信息
      */
-    getUserInfo({ commit }) {
+    getUserInfo({commit}) {
       return new Promise((resolve, reject) => {
-        try {
-          getUserInfo()
-            .then(data => {
-              commit('setRoles', data.user.roles)
-              commit('setAvatar', data.user.avatar)
-              commit('setUsername', data.user.username)
-              resolve(data.user)
-            })
-            .catch(err => {
-              reject(err)
-            })
-        } catch (error) {
-          reject(error)
-        }
+        getUserInfo()
+          .then(data => {
+            commit('setRoles', data.user.roles)
+            commit('setAvatar', data.user.avatar)
+            commit('setUsername', data.user.username)
+            resolve(data.user)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
     }
   }

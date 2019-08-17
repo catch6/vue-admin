@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import staticRoutes from './staticRoutes'
 import dynamicRoutes from './dynamicRoutes'
 import store from '@/store'
-import { filterDynamicRoutes, generateCachePool, generateMenuRoutes, getToken, nameInRoutes } from '../assets/js/util'
+import {filterDynamicRoutes, generateCachePool, generateMenuRoutes, getToken, nameInRoutes} from '../assets/js/util'
 
 Vue.use(Router)
 
@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
       // 拥有菜单路由列表说明已加载动态路由列表
       if (redirectRoutes.includes(to.name)) {
         // 当要请求的页面在 redirectHomePages 中时，直接重定向到主页
-        next('/home')
+        next({name: 'Home', replace: true})
       } else {
         next()
       }
@@ -54,7 +54,8 @@ router.beforeEach((to, from, next) => {
           store.commit('user/setMenuRoutes', menuRoutes)
           store.commit('user/setCachePool', cachePool)
           // 设置 replace: true 可以避免用户在返回的时候回退到登录页
-          next({ ...to, replace: true })
+          // 使用 router.push而不是next() 以解决 Uncaught (in promise) undefined
+          router.push({...to, replace: true})
         })
         .catch(error => {
           console.error(error)
