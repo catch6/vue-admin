@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
-import { resetRouter } from '@/router'
+import {resetRouter} from '@/router'
 
-Cookies.defaults = { expires: 9999 }
+Cookies.defaults = {expires: 9999}
 const TOKEN_KEY = 'token'
 
 export const getToken = () => {
@@ -9,7 +9,7 @@ export const getToken = () => {
 }
 
 export const setToken = (token, expires) => {
-  return Cookies.set(TOKEN_KEY, token, { expires: expires || 1 })
+  return Cookies.set(TOKEN_KEY, token, {expires: expires || 1})
 }
 
 export const removeToken = () => {
@@ -72,16 +72,14 @@ export const filterDynamicRoutes = (routes, roles) => {
 }
 
 /**
- * 生成菜单路由列表，主要是为每个路由添加 parent 属性，方便面包屑导航
+ * 生成所有路由列表，主要是为每个路由添加 parent 属性，方便面包屑导航
  * @param accessRoutes 可访问路由列表
  */
-export const generateMenuRoutes = accessRoutes => {
+export const generateAllRoutes = accessRoutes => {
   let routes = accessRoutes[0].children
   if (routes) {
     routes.forEach(route => {
-      if (hasChildren(route)) {
-        generateParent(route)
-      }
+      generateParent(route, routes)
     })
   } else {
     routes = []
@@ -90,26 +88,51 @@ export const generateMenuRoutes = accessRoutes => {
 }
 
 /**
+ * 生成菜单路由列表，主要是去除掉那些 meta.showMenu=false的路由
+ * @param allRoutes 可访问路由列表
+ */
+export const generateMenuRoutes = allRoutes => {
+  const routes = []
+  allRoutes.forEach(route => {
+    if (route.meta.showMenu === undefined || route.meta.showMenu) {
+      if (hasChildren(route)) {
+        let children = generateMenuRoutes(route.children)
+        if (children.length) {
+          route.children = children
+        } else {
+          delete route.children
+        }
+      }
+      routes.push(route)
+    }
+  })
+  return routes
+}
+
+/**
  * 在子对象的 parent 上挂载父对象
  * 为子节点设置 parent 便于根据当前路由追溯生成面包屑导航
  * @param item
  */
-export const generateParent = item => {
-  item.children.forEach(child => {
-    child.meta.parent = item
-    if (hasChildren(child)) {
+export const generateParent = (item, routes) => {
+  if (item.meta.parentName) {
+    item.meta.parent = findRouteByName(item.meta.parentName, routes)
+  }
+  if (hasChildren(item)) {
+    item.children.forEach(child => {
+      child.meta.parent = item
       generateParent(child)
-    }
-  })
+    })
+  }
 }
 
 /**
  * 生成缓存池
- * @param menuRoutes 菜单路由列表
+ * @param allRoutes 菜单路由列表
  */
-export const generateCachePool = menuRoutes => {
+export const generateCachePool = allRoutes => {
   let cachePool = []
-  menuRoutes.forEach(route => {
+  allRoutes.forEach(route => {
     if (!route.meta || route.meta.cache === undefined || route.meta.cache) {
       cachePool.push(route.name)
     }
@@ -121,22 +144,23 @@ export const generateCachePool = menuRoutes => {
 }
 
 /**
- * 判断一个路由的 name 是否在路由列表（包含子路由）中
+ * 根据路由的 name 在路由列表中查找路由
  * @param name 要判断的路由的 name
  * @param routes 路由列表
- * @returns {boolean}
+ * @returns {Object} 找到的路由
  */
-export const nameInRoutes = (name, routes) => {
-  for (const item of routes) {
-    if (item.name === name) {
-      return true
+export const findRouteByName = (name, routes) => {
+  for (let route of routes) {
+    if (route.name === name) {
+      return route
     } else {
-      if (hasChildren(item)) {
-        if (nameInRoutes(name, item.children)) {
-          return true
+      if (hasChildren(route)) {
+        let result = findRouteByName(name, route.children)
+        if (result) {
+          return result
         }
       }
     }
   }
-  return false
+  return null
 }

@@ -5,14 +5,16 @@ export default {
   state: {
     roles: [],
     avatar: null,
-    username: null,
+    nickname: null,
+    allRoutes: null,
     menuRoutes: null,
     cachePool: []
   },
   getters: {
     roles: state => state.roles,
     avatar: state => state.avatar,
-    username: state => state.username,
+    nickname: state => state.nickname,
+    allRoutes: state => state.allRoutes,
     menuRoutes: state => state.menuRoutes,
     cachePool: state => state.cachePool
   },
@@ -23,8 +25,11 @@ export default {
     setAvatar(state, avatar) {
       state.avatar = avatar
     },
-    setUsername(state, username) {
-      state.username = username
+    setNickname(state, nickname) {
+      state.nickname = nickname
+    },
+    setAllRoutes(state, allRoutes) {
+      state.allRoutes = allRoutes
     },
     setMenuRoutes(state, menuRoutes) {
       state.menuRoutes = menuRoutes
@@ -43,7 +48,7 @@ export default {
           .then(data => {
             commit('setRoles', data.user.roles)
             commit('setAvatar', data.user.avatar)
-            commit('setUsername', data.user.username)
+            commit('setNickname', data.user.nickname)
             resolve(data.user)
           })
           .catch(err => {

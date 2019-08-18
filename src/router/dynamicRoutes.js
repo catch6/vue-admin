@@ -12,6 +12,7 @@ import Wrap from '@/components/Wrap'
  *   showMenu：是否在左侧菜单展示 默认：true
  *   showBread：是否展示面包屑导航 默认：true
  *   cache：是否缓存组件 默认：true
+ *   parentName: 自定义父路由，用于面包屑导航找寻父路由
  * }
  */
 const dynamicRoutes = [

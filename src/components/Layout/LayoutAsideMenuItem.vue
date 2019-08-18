@@ -6,10 +6,9 @@
         <span slot="title">{{ item.meta.title }}</span>
       </template>
       <layout-aside-menu-item
-        v-for="subItem in item.children"
-        :item="subItem"
-        :key="subItem.path"
-      >
+          v-for="subItem in item.children"
+          :item="subItem"
+          :key="subItem.path">
       </layout-aside-menu-item>
     </el-submenu>
     <el-menu-item v-else :route="item.path" :index="item.path">
