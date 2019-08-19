@@ -7,15 +7,15 @@
     </div>
     <el-scrollbar class="layout-aside-scrollbar">
       <el-menu
-          class="layout-aside-menu"
-          :default-active="defaultActive"
-          router
-          unique-opened
-          :collapse="isCollapse">
+        class="layout-aside-menu"
+        :default-active="defaultActive"
+        router
+        unique-opened
+        :collapse="isCollapse">
         <layout-aside-menu-item
-            v-for="item in menuRoutes"
-            :item="item"
-            :key="item.path"/>
+          v-for="item in menuRoutes"
+          :item="item"
+          :key="item.path"/>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -23,11 +23,11 @@
 
 <script>
 import LayoutAsideMenuItem from './LayoutAsideMenuItem'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'LayoutAside',
-  components: {LayoutAsideMenuItem},
+  components: { LayoutAsideMenuItem },
   computed: {
     ...mapGetters('user', ['menuRoutes']),
     ...mapGetters('layout', ['isCollapse']),
@@ -43,7 +43,7 @@ export default {
 .layout-aside
   display flex
   flex-direction column
-  z-index 99999
+  z-index 1000
   height 100vh
   user-select none
   background-color #fff
