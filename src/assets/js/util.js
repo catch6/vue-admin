@@ -1,9 +1,13 @@
-import { resetRouter } from '@/router'
+import {resetRouter} from '@/router'
 
 const TOKEN_KEY = 'token'
 
+let token = null
 export const getToken = () => {
-  let token = sessionStorage.getItem(TOKEN_KEY)
+  if (token) {
+    return token
+  }
+  token = sessionStorage.getItem(TOKEN_KEY)
   if (token) {
     return token
   }
