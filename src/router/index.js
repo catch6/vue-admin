@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
       // 拥有菜单路由列表说明已加载动态路由列表
       if (redirectRoutes.includes(to.name)) {
         // 当要请求的页面在 redirectRoutes 中时，直接重定向到主页
-        next({ name: 'Home', replace: true })
+        next({ path: '/home', replace: true })
       } else {
         next()
       }

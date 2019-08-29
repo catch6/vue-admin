@@ -3,7 +3,7 @@
     <div>
       <img class="avatar" :src="avatar" alt=""/>
       <span class="username">{{ nickname }}</span>
-      <i class="el-icon-arrow-down el-icon--right"></i>
+      <v-icon name="angle-down" style="font-size: 16px"></v-icon>
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="exit">
@@ -39,8 +39,13 @@ export default {
   margin 0 15px
   color #fff
   .avatar
-    width 28px
-    height 28px
+    width 32px
+    height 32px
     vertical-align middle
-    margin-right 8px
+    margin-right 5px
+    border-radius 50%
+  .username
+    font-size 20px
+    vertical-align middle
+    margin-right 5px
 </style>
