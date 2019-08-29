@@ -1,19 +1,30 @@
-import Cookies from 'js-cookie'
-import {resetRouter} from '@/router'
+import { resetRouter } from '@/router'
 
-Cookies.defaults = {expires: 9999}
 const TOKEN_KEY = 'token'
 
 export const getToken = () => {
-  return Cookies.get(TOKEN_KEY)
+  let token = sessionStorage.getItem(TOKEN_KEY)
+  if (token) {
+    return token
+  }
+  token = localStorage.getItem(TOKEN_KEY)
+  if (token) {
+    sessionStorage.setItem(TOKEN_KEY, token)
+  }
+  return token
 }
 
-export const setToken = (token, expires) => {
-  return Cookies.set(TOKEN_KEY, token, {expires: expires || 1})
+export const setToken = (token, remember) => {
+  if (remember) {
+    localStorage.setItem(TOKEN_KEY, token)
+  } else {
+    sessionStorage.setItem(TOKEN_KEY, token)
+  }
 }
 
 export const removeToken = () => {
-  return Cookies.remove(TOKEN_KEY)
+  sessionStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem(TOKEN_KEY)
 }
 
 /**

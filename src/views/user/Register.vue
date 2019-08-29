@@ -148,7 +148,7 @@ export default {
           this.loading = true
           register(this.form)
             .then(data => {
-              setToken(data.token, this.form.remember ? 30 : 1)
+              setToken(data.token, this.form.remember)
               this.loading = false
               this.$router.replace(this.redirect || '/home')
             })
