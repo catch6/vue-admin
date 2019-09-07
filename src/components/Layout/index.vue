@@ -17,7 +17,7 @@ import LayoutFooter from './LayoutFooter'
 
 export default {
   name: 'Layout',
-  components: { LayoutAside, LayoutHeader, LayoutMain, LayoutFooter }
+  components: {LayoutAside, LayoutHeader, LayoutMain, LayoutFooter}
 }
 </script>
 
@@ -31,4 +31,5 @@ export default {
     display flex
     flex-direction column
     width 0
+    overflow hidden
 </style>
