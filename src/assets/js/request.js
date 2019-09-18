@@ -48,7 +48,6 @@ request.interceptors.response.use(
             type: 'warning'
           }).then(() => {
             clearLogin()
-            location.href = '/login'
           })
           return Promise.reject(`${ret.code}:${ret.msg}`)
         default:

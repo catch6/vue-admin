@@ -1,4 +1,6 @@
-import {resetRouter} from '@/router'
+import { resetRouter } from '@/router'
+import router from '@/router'
+import store from '@/store'
 
 const TOKEN_KEY = 'token'
 
@@ -27,6 +29,7 @@ export const setToken = (token, remember) => {
 }
 
 export const removeToken = () => {
+  token = null
   sessionStorage.removeItem(TOKEN_KEY)
   localStorage.removeItem(TOKEN_KEY)
 }
@@ -37,6 +40,8 @@ export const removeToken = () => {
 export const clearLogin = () => {
   removeToken()
   resetRouter()
+  store.commit('user/setAllRoutes', null)
+  router.replace('/login')
 }
 
 /**

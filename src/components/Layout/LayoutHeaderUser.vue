@@ -27,7 +27,6 @@ export default {
     handleCommand(command) {
       if (command === 'exit') {
         clearLogin()
-        location.href = '/login'
       }
     }
   }
